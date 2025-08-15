@@ -1,0 +1,33 @@
+00_ agregar pregunta "mi usuario en investigar" (tiene que estar primera, setear como obligatorio y agregar descripcion)
+01_ agregar url del form en firebase (encode-config/config/googleFormsURLs)
+02_ agregar script confirmacion (ver Id del script*)
+03_ agregar funcion onSubmit(e) que llame al metodo sendConfirmationToInvestigar(e)
+04_ agregar trigger que llame a onSubmit al enviarse el formulario
+05_ (ver de configurar el cartelito que aparece cuando se manda el form, para que diga "guardando respuesta...")
+
+/*
+* URLs Testing
+*/
+
+00_ stai -> https://docs.google.com/forms/d/1Wf8b6VcORHDubmI569wVylsPFCd8DIaiaOCEwAnBSV8/edit
+01_ BDI_II -> https://docs.google.com/forms/d/17nW8MJvAGdt2fuwDC64-tpzO7XxcFHUoFrBMMEiWrm0/edit
+02_ IPIP50 -> https://docs.google.com/forms/d/18zPL6RhwQyWZPWvZfn_u1prG7s2KZ55YXylxQCcZz0k/edit
+03_ GAD-7 -> https://docs.google.com/forms/d/1dZorWZZYXoEg9h_VXV_U1gc4OKk4jUufH5cCdGYSa9U/edit
+04_ PANAS -> https://docs.google.com/forms/d/1H_cIY-12I6iCEgfWWQ8-U640TSrBV_uJwztWmSV1QOw/edit
+05_ PITSBURG -> https://docs.google.com/forms/d/1WuEICbMqJ0ESb8wbcfcGuDY7V8u7Y3PvADXw90tnzUQ/edit
+
+/*
+* * ID script encode_formConfirm
+*/
+
+1S3h2eTuoMNx1eWhW24TIyfjmf2KhABN0X2w6mBhR0HsuaS1iQngaA2KE
+
+/*
+* ** ej funcion onSubmit
+*/
+
+"user strict"
+
+function onSubmit(e) {
+  encode_formConfirmtesting.sendConfirmationToInvestigar(e);
+}

@@ -1,0 +1,58 @@
+.audios
+{
+    display: flex;
+    flex-flow: column;
+}
+
+.audios h1
+{
+    margin-bottom: 0px;
+}
+
+.audios-card
+{
+    max-width: 56rem;
+    margin-top: 1rem;
+}
+
+.audios-card-content
+{
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    column-gap: 1rem;
+}
+
+.audios-card-content > img
+{
+    width: 100%;
+}
+
+#right-column {
+    display: grid;
+    grid-template-rows: 1fr auto;
+}
+
+.instructions-recorder-and-list
+{
+    display: flex;
+    flex-flow: column;
+    grid-row: 1;
+    justify-content: center;
+}
+
+.save-form-btn {
+    grid-row: 2;
+    margin-right: 1rem;
+    justify-self: flex-end;
+    margin-bottom: 1rem !important;
+}
+
+.mat-list {
+    margin: 0 0 2rem 0;
+}
+
+.mat-list .mat-list-icon {
+    width: 0.5rem;
+    height: 0.5rem;
+    font-size: 0.5rem;
+}

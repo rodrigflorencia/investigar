@@ -29,9 +29,6 @@ export class MessageOkPrevTestComponent implements OnInit {
     this.router.navigate(['/creativity/test']);
   }
   ngOnInit(): void {
-    // Skip validation and directly show the content
-    setTimeout(() => {
-      this.load = true;
-    }, 1000);
+    
   }
 }

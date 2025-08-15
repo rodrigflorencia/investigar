@@ -1,0 +1,18 @@
+<h1 mat-dialog-title>¿Se escucha bien?</h1>
+<div mat-dialog-content>
+    <audio autoplay controls controlsList="nodownload">
+        <source [src]="audio" type="audio/webm"/>
+    </audio>
+</div>
+<div mat-dialog-actions>
+    <button mat-stroked-button
+        (click)="onClose(false)">
+        No se escucha
+    </button>
+    <button mat-raised-button
+        color="primary"
+        (click)="onClose(true)"
+        cdkFocusInitial>
+        Sí, se escucha bien
+    </button>
+</div>

@@ -162,7 +162,7 @@ export class ExerciseService implements IRulitTestExercise {
   
     getConsecutiveCorrectExercises(testName: TestName): number {
       // In this context _user.nextTest has the name of the current test
-  console.log("adasdada", testName)
+
       if (testName == 'learning') {
         return -1;
       }
@@ -192,7 +192,7 @@ export class ExerciseService implements IRulitTestExercise {
     }
   
     saveTestData() {
-        console.log("pasas");
+       
       this._rulitFirestoreService.saveRulitUserData(this._user);
     }
   }

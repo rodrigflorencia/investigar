@@ -1,0 +1,15 @@
+<div class="suspect">
+
+  <img [src]="suspectPhotoUrl"
+    [ngClass]="{'selected': isSelected === true}"
+    (click)="selectSuspect()"
+    alt=""/>
+
+  @if (suspectId == absentSuspectId) {
+    <mat-radio-button #suspectButton value="suspect">No está</mat-radio-button>
+  } @else {
+    <mat-radio-button #suspectButton value="suspect">Sospechoso {{ suspectIndex }}</mat-radio-button>
+  }
+
+
+</div>

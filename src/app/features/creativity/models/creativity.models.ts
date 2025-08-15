@@ -9,7 +9,7 @@ export interface Clock {
     state: string;
     minutes: number;
     limit: number;
-  }
+}
 export interface CreativeUser {
     nameLastName: any;
     age: any;
@@ -25,4 +25,8 @@ export interface CreativeUser {
     proposal: any[];
     dateStart: any;
     dateEnd: any;
+}
+export interface TestCreativity {
+    id: number;
+    name: string;
 }

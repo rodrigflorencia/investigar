@@ -1,0 +1,87 @@
+<section class="container">
+  <app-header-encode></app-header-encode>
+  <section class="main-app-section">
+    <div class="wellcome-message">
+
+      @if (this.user.sessionOne.completed == false) {
+        <h1 class="wellcome-heading"><b>{{ userName }},</b> ¡bienvenido/a!</h1>
+        <h3>
+          Muchas gracias por participar en esta investigación.
+          Tu participación es sumamente valiosa para nosotros.
+        </h3>
+      } @else {
+        @if (this.user.sessionTwo.perpetratorCondition && this.user.sessionTwo.completed == true) {
+          <div>
+            <h1 class="wellcome-heading">¡Test finalizado!</h1>
+            <h3>
+              Muchas gracias por participar en esta investigación.
+              Tu participación es sumamente valiosa para nosotros.
+            </h3>
+          </div>
+        }
+        @if (this.user.sessionTwo.perpetratorCondition && this.user.sessionTwo.completed == false) {
+          <div>
+            <h1 class="wellcome-heading">¡Bienvenido de vuelta {{ userName }}!</h1>
+            <h3>
+              Muchas gracias por participar en esta investigación.
+              Tu participación es sumamente valiosa para nosotros.
+            </h3>
+          </div>
+        }
+        @if (!this.user.sessionTwo.perpetratorCondition) {
+          <h1 class="warning">Sesion 2 en espera de ser habilitada.</h1>
+        }
+      }
+
+
+
+      @if (this.user.sessionOne.completed == false || this.user.sessionOne.completed == true && this.user.sessionTwo.perpetratorCondition
+        && this.user.sessionTwo.completed == false) {
+        <mat-card class="wellcome-card">
+          <mat-card-content class="wellcome-card-content">
+            <img src="assets/images/encode_wellcome_image.jpeg" alt=""/>
+            <div class="list-and-button">
+              <h3>Antes de empezar</h3>
+              <mat-list>
+                <mat-list-item>
+                  <mat-icon mat-list-icon
+                  color="accent">lens</mat-icon>
+                  <p class="mat-list-text">
+                    Es necesario que estés en un ambiente con poco ruido.
+                  </p>
+                </mat-list-item>
+                <mat-list-item>
+                  <mat-icon mat-list-icon
+                  color="accent">lens</mat-icon>
+                  <p class="mat-list-text">
+                    Ésta práctica requiere tener micrófono y buena conexión.
+                  </p>
+                </mat-list-item>
+                <mat-list-item>
+                  <mat-icon mat-list-icon
+                  color="accent">lens</mat-icon>
+                  <p class="mat-list-text">
+                    Necesitamos que compruebes su buen funcionamiento.
+                  </p>
+                </mat-list-item>
+              </mat-list>
+              <a mat-raised-button
+                class="save-form-btn"
+                routerLink="../video-test"
+                routerLinkActive="active">
+                Comenzar
+              </a>
+              <!-- testing -->
+              <!-- <a mat-raised-button
+              class="save-form-btn"
+              routerLink="../audios"
+              routerLinkActive="active">
+              end
+            </a> -->
+          </div>
+        </mat-card-content>
+      </mat-card>
+    }
+  </div>
+</section>
+</section>

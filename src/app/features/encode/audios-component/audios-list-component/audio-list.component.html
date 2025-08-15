@@ -1,0 +1,26 @@
+<section class="audio-list">
+
+  @if (isUploadingNewAudio$ | async) {
+    <div class="audio uploading mat-elevation-z1">
+      <mat-spinner [diameter]="32"></mat-spinner>
+      <p>Subiendo audio...</p>
+    </div>
+  } @else {
+    @if (audios.length == 0) {
+      <div
+        class="audio mat-elevation-z1">
+        <p id="empty-list-message">Lista de audios vacia</p>
+      </div>
+    }
+    @if (audios.length > 0) {
+      <div
+        class="audio mat-elevation-z1">
+        <mat-icon >done_all</mat-icon>
+        <p>{{audios.length}} audios guardados</p>
+      </div>
+    }
+  }
+
+
+
+</section>

@@ -1,0 +1,76 @@
+<section class="container">
+    <app-header-encode></app-header-encode>
+    <section class="main-app-section">
+        <div class="somnolence-degree">
+           
+            <form [formGroup]="somnolenceDegreeFormGroup" (ngSubmit)="onSaveForm()">
+            
+                <mat-card>
+                    
+                    <mat-card-header>
+                        <mat-card-title>¿Cuán alerta te sentís <b>en este momento</b>?</mat-card-title>
+                    </mat-card-header>
+                    
+                    <mat-card-content class="form-fields">
+                    
+                        <!-- Grado de somnolencia -->
+                        <div class="labelAndRadioContainer">
+                            
+                            <mat-radio-group 
+                                aria-labelledby="somnolence-degree-label"
+                                formControlName="somnolenceDegree"
+                                class="radioButtonsGroup">
+                                <mat-radio-button [value]="somnolenceDegrees.totallyAwake">
+                                    {{somnolenceDegrees.totallyAwake}}
+                                </mat-radio-button>
+                                <mat-radio-button [value]="somnolenceDegrees.veryHigh">
+                                    {{somnolenceDegrees.veryHigh}}
+                                </mat-radio-button>
+                                <mat-radio-button [value]="somnolenceDegrees.relaxed">
+                                    {{somnolenceDegrees.relaxed}}
+                                </mat-radio-button>
+                                <mat-radio-button [value]="somnolenceDegrees.littleConfused">
+                                    {{somnolenceDegrees.littleConfused}}
+                                </mat-radio-button>
+                                <mat-radio-button [value]="somnolenceDegrees.confused">
+                                    {{somnolenceDegrees.confused}}
+                                </mat-radio-button>
+                                <mat-radio-button [value]="somnolenceDegrees.tired">
+                                    {{somnolenceDegrees.tired}}
+                                </mat-radio-button>
+                                <mat-radio-button [value]="somnolenceDegrees.almostSlept">
+                                    {{somnolenceDegrees.almostSlept}}
+                                </mat-radio-button>
+                                <mat-radio-button [value]="somnolenceDegrees.slept">
+                                    {{somnolenceDegrees.slept}}
+                                </mat-radio-button>
+                            </mat-radio-group>
+
+                        </div>    
+                        
+                        <!-- Boton siguiente -->
+                        <mat-card-actions>
+                            <button mat-stroked-button
+                                (click)="back()">
+                                Volver
+                            </button>
+                            <button mat-raised-button 
+                                type="submit" 
+                                class="save-form-btn">
+                                Siguiente
+                            </button>   
+                        </mat-card-actions>
+                        
+                    </mat-card-content>
+                
+                </mat-card>
+                
+            </form>
+            
+            <p class="mat-caption">
+                * La información que brindes es totalmente confidencial y solo se utilizará con fines académicos.
+            </p>
+        
+        </div>
+    </section>
+</section>

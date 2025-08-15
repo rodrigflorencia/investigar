@@ -1,96 +1,96 @@
 import { Injectable } from '@angular/core';
 import {
-  collection,
-  CollectionReference,
-  doc,
-  endBefore,
-  Firestore,
-  getDoc,
-  getDocs,
-  increment,
-  limit,
-  orderBy,
-  query,
-  QuerySnapshot,
-  setDoc,
-  startAfter,
-  startAt,
-  updateDoc,
+    collection,
+    CollectionReference,
+    doc,
+    endBefore,
+    Firestore,
+    getDoc,
+    getDocs,
+    getFirestore,
+    increment,
+    limit,
+    orderBy,
+    query,
+    QuerySnapshot,
+    setDoc,
+    startAfter,
+    startAt,
+    updateDoc,
 } from '@angular/fire/firestore';
 import { CreativeUser } from '../models/creativity.models';
 
 @Injectable({
-  providedIn: 'root',
+    providedIn: 'root',
 })
 export class CreativityFirestoreService {
-  private readonly _metadataCollectionRef: CollectionReference;
-  private readonly _creativityUsersCollectionRef: CollectionReference<CreativeUser>;
+    private readonly _firestore = getFirestore();
+    private readonly _metadataCollectionRef = collection(this._firestore, 'creative-meta');
+    private readonly _creativityUsersCollectionRef
+        = collection(
+            this._firestore,
+            'creatives-users-config'
+        ) as CollectionReference<CreativeUser>;
 
-  constructor(private readonly _firestore: Firestore) {
-    this._metadataCollectionRef = collection(this._firestore, 'creatives-meta');
-    this._creativityUsersCollectionRef = collection(
-      this._firestore,
-      'creatives-users',
-    ) as CollectionReference<CreativeUser>;
-  }
 
-  getCreativityMetadataCounter() {
-    const ref = doc(this._metadataCollectionRef, 'tests-counter');
-    return getDoc(ref);
-  }
+    getCreativityMetadataCounter() {
+        const ref = doc(this._metadataCollectionRef, 'tests-counter');
+        return getDoc(ref);
+    }
 
-  getFirstPage(pageSize = 3): Promise<QuerySnapshot<CreativeUser>> {
-    const q = query(
-      this._creativityUsersCollectionRef,
-      orderBy('dateStart', 'desc'),
-      limit(pageSize),
-    );
-    return getDocs(q);
-  }
+    getFirstPage(pageSize = 3): Promise<QuerySnapshot<CreativeUser>> {
+        const q = query(
+            this._creativityUsersCollectionRef,
+            orderBy('dateStart', 'desc'),
+            limit(pageSize),
+        );
+        return getDocs(q);
+    }
 
-  getPrevPage(
-    prevFirst,
-    actualFirst,
-    pageSize = 3,
-  ): Promise<QuerySnapshot<CreativeUser>> {
-    const q = query(
-      this._creativityUsersCollectionRef,
-      orderBy('dateStart', 'desc'),
-      limit(pageSize),
-      startAt(prevFirst),
-      endBefore(actualFirst),
-    );
-    return getDocs(q);
-  }
+    getPrevPage(
+        prevFirst,
+        actualFirst,
+        pageSize = 3,
+    ): Promise<QuerySnapshot<CreativeUser>> {
+        const q = query(
+            this._creativityUsersCollectionRef,
+            orderBy('dateStart', 'desc'),
+            limit(pageSize),
+            startAt(prevFirst),
+            endBefore(actualFirst),
+        );
+        return getDocs(q);
+    }
+    async saveContact(newUser: CreativeUser): Promise<void> {
 
-  getNextPage(actualLast, pageSize = 3): Promise<QuerySnapshot<CreativeUser>> {
-    const q = query(
-      this._creativityUsersCollectionRef,
-      orderBy('dateStart', 'desc'),
-      limit(pageSize),
-      startAfter(actualLast),
-    );
-    return getDocs(q);
-  }
+        const userDocRef = doc(this._creativityUsersCollectionRef);
+        this._incrementUserCounter();
+        await setDoc(userDocRef, newUser, { merge: true });
+    }
+    getNextPage(actualLast, pageSize = 3): Promise<QuerySnapshot<CreativeUser>> {
+        const q = query(
+            this._creativityUsersCollectionRef,
+            orderBy('dateStart', 'desc'),
+            limit(pageSize),
+            startAfter(actualLast),
+        );
+        return getDocs(q);
+    }
 
-  async getAllUsersData(): Promise<QuerySnapshot<CreativeUser>> {
-    const q = query(
-      this._creativityUsersCollectionRef,
-      orderBy('dateStart', 'desc'),
-    );
-    return getDocs(q);
-  }
+    async getAllUsersData(): Promise<QuerySnapshot<CreativeUser>> {
+        const q = query(
+            this._creativityUsersCollectionRef,
+            orderBy('dateStart', 'desc'),
+        );
+        return getDocs(q);
+    }
 
-  saveContact(newUser: CreativeUser): Promise<void> {
-    const userDocRef = doc(this._creativityUsersCollectionRef);
-    this._incrementUserCounter();
-    return setDoc(userDocRef, newUser);
-  }
 
-  private _incrementUserCounter(): Promise<void> {
-    const ref = doc(this._metadataCollectionRef, 'tests-counter');
-    return updateDoc(ref, {
-      count: increment(1),
-    });
-  }
+
+    private _incrementUserCounter(): Promise<void> {
+        const ref = doc(this._metadataCollectionRef, 'tests-counter');
+        return updateDoc(ref, {
+            count: increment(1),
+        });
+    }
 }

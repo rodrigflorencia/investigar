@@ -1,0 +1,198 @@
+// DESKTOP
+// 1600 x 900
+// 1440 x 900
+// 1366 x 768
+// 1024 x 600
+
+.full-width {
+    width: 100%;
+}
+.container-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+mat-card.shipping-card {
+  min-width: 410px;
+  color: #4a4067;
+  padding: 10px 10px 0px 10px;
+  margin: 5px 25px 20px 25px;
+}
+mat-card > mat-card-header.container-title {
+  background-color: #4a4067;
+  color: white;
+  display: flex;  
+  justify-content: center;
+  padding: 14px 0px; 
+}
+
+.mat-card-title {
+  margin: 0px !important;
+}
+p.message {
+  display: flex;  
+  justify-content: center;
+  font-weight: bold;
+  color: #e33b88;
+  margin: 8px 0px 4px 0px;
+}
+
+div.row {
+  display: flex;
+  flex-direction: row;
+  padding: 6px 20px;
+}
+
+.col {
+  flex: 1;
+}
+.mat-form-field-wrapper .ng-tns-c91-8 {
+  margin-right: 3px !important;
+}
+.course {
+  margin-left: 3px;
+}
+div.col {
+  text-align: left;
+}
+.col:last-child {
+  margin-right: 0;
+}
+
+mat-label.label {
+  font-weight: 500;
+}
+
+.container-button, .container-button-off {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 4px;
+  margin: 0px;
+}
+
+button {
+  margin: 2px 0px;
+}
+.buttonForm, .buttonForm-off {
+  background-color: #76ad2e;
+  color: white;
+  font-size: large;
+  padding: 10px 134px;
+  font-weight: 500;
+}
+
+.buttonForm:hover {
+  background-color: #76ad2ecc;
+}
+div.container-error-message {
+  margin-top: 5px;
+  color: #e33b88;
+  font-weight: bold;
+  font-size: x-small;
+}
+
+@media screen and (max-width: 1366px) {
+
+  mat-card > mat-card-header.container-title {
+    background-color: #4a4067;
+    color: white;
+    display: flex;  
+    justify-content: center;
+    padding: 8px 0px; 
+  }
+
+  mat-card.shipping-card { 
+    padding: 10px 10px 0px 10px;   
+    margin: 20px 25px 0px 25px;
+  }
+  div.row {
+    padding: 7px 20px;
+  }
+  div.mat-form-field-infix .ng-tns-c91-0 {
+    border-top: 0px !important;  
+  }
+
+  .buttonForm, .buttonForm-off { 
+    padding: 5px 134px;
+  }
+   
+}
+
+@media screen and (max-width: 1024px) {
+
+  mat-card.shipping-card { 
+    padding: 10px 10px 0px 10px;   
+    margin: 10px 0px 0px 0px;
+  }
+  .input {
+    width: 290px !important;
+  }
+  .row {
+    padding-top: 0px;
+  }
+  .container-button, .container-button-off {
+    padding: 0px 4px 10px 4px;
+  }
+}
+
+
+@media screen and (max-width: 425px) {
+
+  mat-card.shipping-card {
+    padding: 10px 10px 0px 10px;
+    margin: 5px 25px 20px 25px;
+  }
+
+  app-form {
+    margin: auto;
+  }
+
+  mat-card.shipping-card {
+    min-width: 300px; 
+    margin: 5px auto; 
+  }
+  
+  .buttonForm, .buttonForm-off {
+    padding: 10px 85px;
+  }
+ 
+  div.row, div.ng-star-inserted {
+    display: block !important;  
+
+  }
+  .year, .grade {
+    margin-bottom: 10px;
+  }
+  
+  
+}
+
+@media screen and (max-width: 320px) { 
+  
+  mat-card.shipping-card {
+    padding: 10px 5px 0px 5px;
+    width: 230px !important; 
+    margin: 5px 0px 20px 0px;
+
+  }
+  .row {
+    width: 300px;
+   
+  }
+  div.row {
+    padding: 6px 5px;
+    margin: auto;
+  }
+  .input {
+    width: 270px !important;
+
+  }
+  .buttonForm, .buttonForm-off {
+    padding: 10px 80px;
+    margin-top: 10px !important;
+  }
+ 
+}
+
+

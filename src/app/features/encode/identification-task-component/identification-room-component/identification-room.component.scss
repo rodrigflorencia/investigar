@@ -1,0 +1,14 @@
+#identification-room-container {
+    display: flex;
+    flex-flow: column;
+    row-gap: 32px;
+    align-items: center;
+    max-width: 80rem;
+}
+
+#lineup {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 16px;
+}
+
