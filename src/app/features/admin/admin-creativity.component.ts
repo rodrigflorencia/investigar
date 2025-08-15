@@ -7,8 +7,7 @@ import { CreativeUser } from '../creativity/models/creativity.models';
 import { ReplaceNullWithTextPipe } from 'src/app/shared/pipes/replace-null.pipe';
 import { HeaderAdminComponent } from 'src/app/layout/header-admin/header-admin.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
     selector: 'app-admin-creativity-page',
@@ -71,18 +70,7 @@ export class AdminCreativityPage implements OnInit {
 
     // Alias for template compatibility
     getData() {
-        return this.exportData();
+        return 'no disponible';
     }
 
-    async exportData() {
-        const usersToExport = this.creativesUsers;
-        const exportData = usersToExport.map(user => ({
-            ...user,
-            dateStart: user.dateStart ? user.dateStart.toDate() : '',
-            dateEnd: user.dateEnd ? user.dateEnd.toDate() : '',
-            proposal: Array.isArray(user.proposal) ? user.proposal.join('; ') : user.proposal
-        }));
-
-        // CsvExporter.exportToCsv(exportData, this.displayedColumns, 'dataUsersCreatives.csv');
-    }
 }

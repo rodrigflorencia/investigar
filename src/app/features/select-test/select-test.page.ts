@@ -10,7 +10,6 @@ import { MatIconModule } from '@angular/material/icon';
 
 // Components
 import { HeaderDarkComponent } from 'src/app/layout/header-dark/header-dark.component';
-import { SharedModule } from 'src/app/shared/shared.module';
 
 @Component({
     selector: 'app-select-test',
