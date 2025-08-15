@@ -18,13 +18,13 @@ import {
     updateDoc,
 } from '@angular/fire/firestore';
 import { CreativeUser } from '../models/creativity.models';
-
+import { COLLECTIONS } from 'src/app/data/collections';
 @Injectable({
     providedIn: 'root',
 })
 export class CreativityFirestoreService {
     private readonly _firestore = getFirestore();
-    private readonly _metadataCollectionRef = collection(this._firestore, 'creative-meta');
+    private readonly _metadataCollectionRef = collection(this._firestore, COLLECTIONS.META);
     private readonly _creativityUsersCollectionRef
         = collection(
             this._firestore,

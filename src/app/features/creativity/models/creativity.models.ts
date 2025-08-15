@@ -10,6 +10,23 @@ export interface Clock {
     minutes: number;
     limit: number;
 }
+
+export enum Gender {
+    Male = 'Masculino',
+    Female = 'Femenino',
+    NonBinary = 'No Binario'
+}
+
+export enum EducationLevel {
+    incompleteSecondary = 'Secundario incompleto',
+    completeSecondary = 'Secundario completo',
+    incompleteTertiary = 'Terciario incompleto',
+    completeTertiary = 'Terciario completo',
+    incompleteBachelors = 'Universitario incompleto',
+    completeBachelors = 'Universitario completo'
+}
+
+
 export interface CreativeUser {
     nameLastName: any;
     age: any;

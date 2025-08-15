@@ -2,19 +2,17 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
 
 import { FooterComponent } from 'src/app/layout/footer/footer.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @Component({
     selector: 'app-home',
     standalone: true,
     imports: [
-        CommonModule,
+
         RouterModule,
-        MatCardModule,
-        MatIconModule,
+        SharedModule,
         FooterComponent,
     ],
     templateUrl: './home.page.html',

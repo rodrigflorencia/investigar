@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild, ElementRef, NgZone, AfterViewChecked } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { MatDialogRef, MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { fromEvent, interval, lastValueFrom, Observable, Subscription } from 'rxjs';
 import { map, filter, take, tap } from 'rxjs/operators';
 
@@ -11,13 +10,14 @@ import { HeaderRulitComponent } from 'src/app/layout/header-rulit/header-rulit.c
 import { MATERIAL_IMPORTS } from 'src/app/shared/ui/material.imports';
 
 import { RulitUserService } from '../services/rulit.service';
-
+import { SharedModule } from 'src/app/shared/shared.module';
 import { Breakpoints, BreakpointObserver, BreakpointState, MediaMatcher } from '@angular/cdk/layout';
 import { RulitDialogScreenOrientationComponent } from './rulit-dialog-screen-orientation.component';
 import { RulitDialogLongMemoryWellcomeComponent } from './rulit-dialog-long-memory-wellcome.component';
 import { RulitDialogFinishComponent } from './rulit-dialog-finish.component';
 import { RulitDialogNotConnectedNodeComponent } from './rulit-dialog-not-connected-node.component';
 import { RulitTestService } from '../services/rulit.test.service';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 
 
 @Component({
@@ -27,6 +27,7 @@ import { RulitTestService } from '../services/rulit.test.service';
         CommonModule,
         RouterModule,
         HeaderRulitComponent,
+
         ...MATERIAL_IMPORTS
     ],
     templateUrl: './rulit-test.component.html',

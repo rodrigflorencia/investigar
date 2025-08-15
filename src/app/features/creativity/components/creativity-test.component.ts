@@ -1,22 +1,22 @@
-import { Component, OnInit, inject, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HeaderCreativityComponent } from 'src/app/layout/header-creativity/header-creativity.component';
 import { MATERIAL_IMPORTS } from 'src/app/shared/ui/material.imports';
-import { timer, Subscription } from 'rxjs';
-import { takeWhile } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+
 
 import { Element, CreativeUser, Clock, TestCreativity } from '../models/creativity.models';
 import { CreativityStore } from '../models/creativity.store';
 import { CreativityRepo } from '../models/creativity.repo';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { COLLECTIONS } from 'src/app/data/collections';
 
 @Component({
     selector: 'app-creativity-test',
     standalone: true,
     imports: [
-        CommonModule,
+
         RouterModule,
         FormsModule,
         HeaderCreativityComponent, SharedModule,
@@ -89,7 +89,7 @@ export class CreativityTestPage implements OnInit {
 
 
     getUserFromStorage(): CreativeUser | null {
-        const creativeUser = localStorage.getItem('creative-user');
+        const creativeUser = localStorage.getItem(COLLECTIONS.CREATIVITY_USERS);
         console.log(creativeUser);
         return creativeUser ? JSON.parse(creativeUser) : null;
     }

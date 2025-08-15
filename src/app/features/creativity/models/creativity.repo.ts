@@ -18,6 +18,7 @@ import {
     updateDoc,
 } from '@angular/fire/firestore';
 import { CreativeUser } from './creativity.models';
+import { COLLECTIONS } from 'src/app/data/collections';
 
 @Injectable({
     providedIn: 'root',
@@ -28,10 +29,10 @@ export class CreativityRepo {
 
     constructor(private readonly _firestore: Firestore) {
 
-        this._metadataCollectionRef = collection(this._firestore, 'creative-meta');
+        this._metadataCollectionRef = collection(this._firestore, COLLECTIONS.META);
         this._creativityUsersCollectionRef = collection(
             this._firestore,
-            'creative-users',
+            COLLECTIONS.CREATIVITY_USERS,
         ) as CollectionReference<CreativeUser>;
     }
 

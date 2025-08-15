@@ -2,11 +2,11 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Params, RouterModule } from '@angular/router';
 import { HeaderCreativityComponent } from 'src/app/layout/header-creativity/header-creativity.component';
-import { CarouselComponent } from 'src/app/shared/ui/carousel.component';
 import { MATERIAL_IMPORTS } from 'src/app/shared/ui/material.imports';
-import { CarouselItem } from 'src/app/shared/models/carousel-item.model';
 import Swiper from 'swiper';
 import { Element } from '../models/creativity.models';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { CarouselItem } from 'src/app/shared/models/carousel-item.model';
 
 @Component({
     selector: 'app-creativity-instructions',
@@ -15,7 +15,7 @@ import { Element } from '../models/creativity.models';
         CommonModule,
         RouterModule,
         HeaderCreativityComponent,
-        CarouselComponent,
+        SharedModule,
         ...MATERIAL_IMPORTS,
     ],
     templateUrl: './creativity-instructions.component.html',

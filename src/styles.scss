@@ -28,15 +28,13 @@ body {
   // variables at https://material.angular.dev/guide/system-variables
   background-color: var(--mat-sys-surface);
   color: var(--mat-sys-on-surface);
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
   font: var(--mat-sys-body-medium);
 
   // Reset the user agent margin.
   margin: 0;
 }
 html, body { height: 100%; max-height: auto; }
-
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-
 // Custom Rulit Snack
 
 snack-bar-container.custom-rulit-snack-bar {
@@ -112,6 +110,3 @@ snack-bar-container.custom-rulit-snack-bar {
     background-color: #4e3a3a00;
     box-shadow: none;
 }
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
