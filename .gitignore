@@ -48,3 +48,8 @@ docker*
 /firebase.json
 .firebaserc
 
+
+# Firebase
+.firebase
+*-debug.log
+.runtimeconfig.json

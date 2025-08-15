@@ -7,149 +7,179 @@ import { MATERIAL_IMPORTS } from 'src/app/shared/ui/material.imports';
 import { timer, Subscription } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 
-import { Element, CreativeUser, Clock } from '../models/creativity.models';
+import { Element, CreativeUser, Clock, TestCreativity } from '../models/creativity.models';
 import { CreativityStore } from '../models/creativity.store';
 import { CreativityRepo } from '../models/creativity.repo';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @Component({
-  selector: 'app-creativity-test',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    FormsModule,
-    HeaderCreativityComponent,
-    ...MATERIAL_IMPORTS,
-  ],
-  templateUrl: './creativity-test.component.html',
-  styleUrls: ['./creativity-test.component.scss'],
+    selector: 'app-creativity-test',
+    standalone: true,
+    imports: [
+        CommonModule,
+        RouterModule,
+        FormsModule,
+        HeaderCreativityComponent, SharedModule,
+        ...MATERIAL_IMPORTS,
+    ],
+    templateUrl: './creativity-test.component.html',
+    styleUrls: ['./creativity-test.component.scss'],
 })
 
 export class CreativityTestPage implements OnInit, OnDestroy {
-  private readonly router = inject(Router);
-  private readonly store = inject(CreativityStore);
-  private readonly repo = inject(CreativityRepo);
+    private readonly router = inject(Router);
+    private readonly store = inject(CreativityStore);
+    private readonly repo = inject(CreativityRepo);
 
-  // STATE
-  started = false;
-  countDown = 4;
-  alertDesert = false;
-  dateStart: Date;
-  dateEnd: Date;
-  
-  // CLOCK
-  totalTime = 5 * 60; // 5 minutes in seconds
-  timeLeft = this.totalTime;
-  timerSubscription: Subscription;
-  clock: Clock = {
-    seconds: this.totalTime,
-    state: 'started',
-    minutes: 4,
-    limit: 0,
-  };
-  // ELEMENT from store
-  element: Element | null = null;
+    // STATE
+    started = false;
+    countDown = 4;
+    alertDesert = false;
+    dateStart: Date;
+    dateEnd: Date;
 
-  // PROPOSAL
-  empty = '';
-  finalProposals = [];
-  proposals = '';
-  
-  user: CreativeUser | null = null;
-  points = 0;
-  minRandom = 0;
-  maxRandom = 2;
-  ngOnInit(): void {
-    this.user = this.getUserFromStorage();
-    this.element = this.store.selectedElement();
+    // CLOCK
+    totalTime = 59; // 5 minutes in seconds
+    timeLeft = this.totalTime;
+    timerSubscription: Subscription;
+    clock: Clock = {
+        seconds: this.totalTime,
+        state: 'started',
+        minutes: 4,
+        limit: 0,
+    };
+    // ELEMENT from store
+    element: Element;
 
-    if (!this.user || !this.element) {
-      this.router.navigate(['/select-test']);
-      return;
+    // PROPOSAL
+    empty = '';
+    finalProposals = [];
+    proposals = '';
+    testCreativity: TestCreativity = {
+        id: 1,
+        name: 'Creatividad',
+    };
+    user: CreativeUser | null = null;
+    points = 0;
+    minRandom = 0;
+    maxRandom = 2;
+    resetClock() {
+        this.clock.minutes = 0;
+        this.clock.seconds = 0;
+        this.alertDesert = false;
+        this.clock.state = 'finalized';
     }
+    getElement() {
+        const finalElement = JSON.parse(localStorage.getItem('final-element'));
+        return finalElement;
+    }
+    ngOnInit(): void {
 
-    this.startCountdown();
-  }
+        this.user = this.getUserFromStorage();
+        this.element = this.getElement();
 
-  ngOnDestroy(): void {
-    this.timerSubscription?.unsubscribe();
-  }
+        if (!this.user) {
 
-  getUserFromStorage(): CreativeUser | null {
-    const creativeUser = localStorage.getItem('creative-user');
-    return creativeUser ? JSON.parse(creativeUser) : null;
-  }
-
-  startCountdown() {
-    // Starts at 4, ticks immediately, so user sees 3, 2, 1
-    this.timerSubscription = timer(0, 1000)
-      .pipe(takeWhile(() => this.countDown > 1))
-      .subscribe(() => {
-        this.countDown--;
-        if (this.countDown === 1) {
-          setTimeout(() => {
-            this.started = true;
-            this.startTest();
-          }, 1000);
+            this.router.navigate(['/select-test']);
+            return;
         }
-      });
-  }
 
-  startTest() {
-    this.dateStart = new Date();
-    this.timerSubscription?.unsubscribe();
-    this.timerSubscription = timer(0, 1000)
-      .pipe(takeWhile(() => this.timeLeft > 0))
-      .subscribe(() => {
-        this.timeLeft--;
-        if (this.timeLeft === 0) {
-          this.finalizedTest();
+        this.startCountdown();
+    }
+
+    ngOnDestroy(): void {
+        this.timerSubscription?.unsubscribe();
+    }
+
+    getUserFromStorage(): CreativeUser | null {
+        const creativeUser = localStorage.getItem('creative-user');
+        console.log(creativeUser);
+        return creativeUser ? JSON.parse(creativeUser) : null;
+    }
+
+    startCountdown() {
+        // Starts at 4, ticks immediately, so user sees 3, 2, 1
+        setTimeout(() => {
+            this.countDown = 3;
+            setTimeout(() => {
+                this.countDown = 2;
+                setTimeout(() => {
+                    this.countDown = 1;
+                    setTimeout(() => {
+                        this.started = true;
+                        this.startTest();
+                    }, 1000);
+                }, 1000);
+            }, 1000);
+        }, 1000);
+    }
+
+    startTest() {
+        this.dateStart = new Date();
+        const test = setInterval(() => {
+            if (this.clock.state === 'started') {
+                this.clock.seconds--;
+                if (this.clock.seconds === -1) {
+                    this.clock.seconds = this.totalTime;
+                    this.clock.minutes--;
+                }
+                if (
+                    this.clock.minutes === this.clock.limit &&
+                    this.clock.seconds === this.clock.limit
+                ) {
+                    this.finalizedTest();
+                    clearInterval(test);
+                }
+            }
+        }, 1000);
+    }
+
+    get minutesLeft(): number {
+        return Math.floor(this.timeLeft / 60);
+    }
+
+    get secondsLeft(): number {
+        return this.timeLeft % 60;
+    }
+
+    activeAlert() {
+        if (!this.alertDesert) {
+            this.alertDesert = true;
+        } else {
+            this.alertDesert = false;
         }
-      });
-  }
-
-  get minutesLeft(): number {
-    return Math.floor(this.timeLeft / 60);
-  }
-
-  get secondsLeft(): number {
-    return this.timeLeft % 60;
-  }
-
-  activeAlert() {
-    this.alertDesert = !this.alertDesert;
-  }
-  validProposal(arrayProposal: string | any[], empty: any) {
-    // eslint-disable-next-line @typescript-eslint/prefer-for-of
-    for (let i = 0; i < arrayProposal.length; i++) {
-      const proposal = arrayProposal[i];
-      if (proposal !== empty) {
-        this.finalProposals.push(proposal);
-      }
     }
-    return this.finalProposals;
-  }
-
-  async finalizedTest() {
-    this.timerSubscription?.unsubscribe();
-    this.dateEnd = new Date();
-
-    const finalProposals = this.validProposal(this.proposals.split('\n').filter(p => p.trim() !== ''), this.empty);
-    
-    if (this.user && this.element) {
-        const updatedUser: CreativeUser = {
-            ...this.user,
-            proposal: finalProposals,
-            object: this.element.name,
-            dateStart: this.dateStart,
-            dateEnd: this.dateEnd,
-        };
-        await this.repo.saveContact(updatedUser);
+    validProposal(arrayProposal: string | any[], empty: any) {
+        // eslint-disable-next-line @typescript-eslint/prefer-for-of
+        for (let i = 0; i < arrayProposal.length; i++) {
+            const proposal = arrayProposal[i];
+            if (proposal !== empty) {
+                this.finalProposals.push(proposal);
+            }
+        }
+        return this.finalProposals;
     }
-    
-    localStorage.removeItem('creative-user');
-    this.store.clearState();
-    // Aquí podría navegar a una página de agradecimiento
-    // this.router.navigate(['/thank-you']);
-  }
+
+    async finalizedTest() {
+        this.timerSubscription?.unsubscribe();
+        this.dateEnd = new Date();
+
+        const finalProposals = this.validProposal(this.proposals.split('\n').filter(p => p.trim() !== ''), this.empty);
+
+        if (this.user && this.element) {
+            const updatedUser: CreativeUser = {
+                ...this.user,
+                proposal: finalProposals,
+                object: this.element.name,
+                dateStart: this.dateStart,
+                dateEnd: this.dateEnd,
+            };
+            await this.repo.saveContact(updatedUser);
+        }
+
+        localStorage.removeItem('creative-user');
+        this.store.clearState();
+        // Aquí podría navegar a una página de agradecimiento
+        // this.router.navigate(['/thank-you']);
+    }
 }

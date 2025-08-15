@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { CreativityTestPage } from './components/creativity-test.component';
 import { CreativityInstructionsPage } from './components/creativity-instructions.component';
-import { PersonalInfoComponent } from '../../shared/components/personal-info.component';
+import { PersonalInfoComponent } from './components/creativity-personal-info.component';
 import { MessageOkPrevTestComponent } from '../../shared/components/message-ok-prev-test.component';
 
 export const CREATIVITY_ROUTES: Routes = [
@@ -16,14 +16,15 @@ export const CREATIVITY_ROUTES: Routes = [
       { 
         path: 'instructions', 
         component: CreativityInstructionsPage,
-        data: { title: 'Instrucciones' }
+        data: { title: 'Instrucciones',
+            nextRoute: 'creativity-personal-info'  }
       },
       { 
         path: 'personal-info',
         component: PersonalInfoComponent,
         data: { 
           title: 'Datos Personales',
-          nextRoute: '/creativity/message-ok' 
+          nextRoute: '/creativity/test' 
         }
       },
       {
