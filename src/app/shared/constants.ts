@@ -9,63 +9,45 @@ export enum Gender {
     FEMALE = 'Femenino',
     OTHER = 'Otro',
     PREFER_NOT_TO_SAY = 'Prefiero no decirlo'
-  }
-  
-  export enum EducationLevel {
+}
+
+export enum EducationLevel {
     PRIMARY = 'Primario',
     SECONDARY = 'Secundario',
     TERTIARY = 'Terciario',
     UNIVERSITY = 'Universitario',
     POSTGRADUATE = 'Posgrado',
     OTHER = 'Otro'
-  }
-  
-  export enum VideoState {
+}
+
+export enum VideoState {
     PLAYING = 'PLAYING',
     PAUSED = 'PAUSED',
     ENDED = 'ENDED',
     SEEKING = 'SEEKING',
     BUFFERING = 'BUFFERING',
     STOPPED = 'STOPPED'
-  }
-  
-  export const MAX_VIDEO_DURATION = 30; // in seconds
-  export const MAX_RECORDING_ATTEMPTS = 3;
-  
+}
+
+export const MAX_VIDEO_DURATION = 30; // in seconds
+export const MAX_RECORDING_ATTEMPTS = 3;
+
 // Admin
 export enum PerpetratorCondition {
     A = 'Perpetrador 1 Presente, Perpetrador 2 Ausente',
     B = 'Perpetrador 2 Presente, Perpetrador 1 Ausente'
 }
 
-// Personal info
-export enum Gender
-{
-    Male = 'Masculino',
-    Female = 'Femenino',
-    NonBinary = 'No Binario'
-}
 
-export enum EducationLevel
-{
-    incompleteSecondary = 'Secundario incompleto',
-    completeSecondary = 'Secundario completo',
-    incompleteTertiary = 'Terciario incompleto',
-    completeTertiary = 'Terciario completo',
-    incompleteBachelors = 'Universitario incompleto',
-    completeBachelors = 'Universitario completo'
-}
-
-export enum SomnolenceDegree
-{
+export enum SomnolenceDegree {
     totallyAwake = 'Me siento activo, vital, alerta o bien despierto.',
     veryHigh = 'Funcionando a niveles altos, pero no completamente alerta.',
-    relaxed= 'Despierto, pero relajado; sensible pero no completamente alerta.',
-    littleConfused= 'Un poco confundido, decepcionado.',
-    confused= 'Confundido; pierdo interés en permanecer despierto; ralentizado.',
-    tired= 'Somnoliento, mareado, luchado contra el sueño; prefiero recostarme.',
-    almostSlept= 'Ya no lucho contra el sueño, comenzaré a dormirme pronto; tengo pensamientos como sueños.',
-    slept= 'Dormido.'
+    relaxed = 'Despierto, pero relajado; sensible pero no completamente alerta.',
+    littleConfused = 'Un poco confundido, decepcionado.',
+    confused = 'Confundido; pierdo interés en permanecer despierto; ralentizado.',
+    tired = 'Somnoliento, mareado, luchado contra el sueño; prefiero recostarme.',
+    almostSlept = 'Ya no lucho contra el sueño, comenzaré a dormirme pronto; tengo pensamientos como sueños.',
+    slept = 'Dormido.'
 }
 
 // Video
@@ -73,8 +55,7 @@ export const VIDEO_PATH = 'assets/videos/videoEncode.mp4';
 
 // Audio recorder
 export const REC_OPTIONS = { mimeType: 'audio/webm' };
-export enum RecorderStatus
-{
+export enum RecorderStatus {
     Ready = 'Esperando para grabar',
     Recording = 'GRABANDO'
 }

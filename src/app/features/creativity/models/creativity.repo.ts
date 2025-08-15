@@ -18,6 +18,7 @@ import {
     updateDoc,
 } from '@angular/fire/firestore';
 import { CreativeUser } from './creativity.models';
+import { COLLECTIONS } from 'src/app/data/collections';
 
 @Injectable({
     providedIn: 'root',
@@ -28,15 +29,15 @@ export class CreativityRepo {
 
     constructor(private readonly _firestore: Firestore) {
 
-        this._metadataCollectionRef = collection(this._firestore, 'creative-meta');
+        this._metadataCollectionRef = collection(this._firestore, COLLECTIONS.META);
         this._creativityUsersCollectionRef = collection(
             this._firestore,
-            'creative-users',
+            COLLECTIONS.CREATIVITY_USERS,
         ) as CollectionReference<CreativeUser>;
     }
 
     getCreativityMetadataCounter() {
-        const ref = doc(this._metadataCollectionRef, 'tests-counter');
+        const ref = doc(this._metadataCollectionRef, 'test-counter');
         return getDoc(ref);
     }
 
@@ -89,7 +90,7 @@ export class CreativityRepo {
     }
 
     private _incrementUserCounter(): Promise<void> {
-        const ref = doc(this._metadataCollectionRef, 'tests-counter');
+        const ref = doc(this._metadataCollectionRef, 'test-counter');
         return updateDoc(ref, {
             count: increment(1),
         });

@@ -1,40 +1,45 @@
 <div class="container-all">
-  <app-header-dark></app-header-dark>
-  <section class="contain-title">
-    <h1 class="title">Elegí la actividad que deseas hacer</h1>
-  </section>
-  <hr class="title-line">
-  <figure class="container">
-    <div class="row">
-      <div class="test-icon" routerLink="/instructions-creativity/312917" routerLinkActive="active">
-        <img class="icon" src="assets/images/testCreatividad.png" alt="mano sosteniendo un foco, test de creatividad">
-        <h3 class="test">CREATIVIDAD</h3>
-      </div>
-      <div class="test-icon-off" routerLink="**" routerLinkActive="active">
-        <img class="icon-off" src="assets/images/testInhibicion.png" alt="rostros enfrentados intercambiando ideas, test de inhibición">
-        <h3 class="test-off">INHIBICIÓN</h3>
-      </div>
-    </div>
-    <div class="row">
-
-      @if (isRulitOpen) {
-        <div  class="test-icon" routerLink="/rulit" routerLinkActive="active">
-          <img class="icon" src="assets/images/testMemoria.png" alt="rostro de perfil con un engranaje en la cabeza, test de memoria">
-          <h3 class="test">MEMORIA</h3>
+    <app-header-dark></app-header-dark>
+    <section class="contain-title">
+        <h1 class="title">Elegí la actividad que deseas hacer</h1>
+    </section>
+    <hr class="title-line">
+    <figure class="container">
+        <div class="row">
+            <div class="test-icon" routerLink="/instructions-creativity/312917" routerLinkActive="active">
+                <img class="icon" src="assets/images/testCreatividad.png"
+                    alt="mano sosteniendo un foco, test de creatividad">
+                <h3 class="test">CREATIVIDAD</h3>
+            </div>
+            <div class="test-icon-off" routerLink="**" routerLinkActive="active">
+                <img class="icon-off" src="assets/images/testInhibicion.png"
+                    alt="rostros enfrentados intercambiando ideas, test de inhibición">
+                <h3 class="test-off">INHIBICIÓN</h3>
+            </div>
         </div>
-      } @else {
-        <div class="test-icon-off" routerLink="/**" routerLinkActive="active">
-          <img class="icon-off" src="assets/images/testMemoria.png" alt="rostro de perfil con un engranaje en la cabeza, test de memoria">
-          <h3 class="test-off">MEMORIA</h3>
+        <div class="row">
+
+            @if (isRulitOpen) {
+            <div class="test-icon" routerLink="/rulit" routerLinkActive="active">
+                <img class="icon" src="assets/images/testMemoria.png"
+                    alt="rostro de perfil con un engranaje en la cabeza, test de memoria">
+                <h3 class="test">MEMORIA</h3>
+            </div>
+            } @else {
+            <div class="test-icon-off" routerLink="/**" routerLinkActive="active">
+                <img class="icon-off" src="assets/images/testMemoria.png"
+                    alt="rostro de perfil con un engranaje en la cabeza, test de memoria">
+                <h3 class="test-off">MEMORIA</h3>
+            </div>
+            }
+
+
+
+            <div class="test-icon-off" routerLink="**" routerLinkActive="active">
+                <img class="icon-off" src="assets/images/testPlaneamiento.png"
+                    alt="libro abierto con lápiz encima, test de planeamiento">
+                <h3 class="test-off">PLANEAMIENTO</h3>
+            </div>
         </div>
-      }
-
-
-
-      <div class="test-icon-off" routerLink="**" routerLinkActive="active">
-        <img class="icon-off" src="assets/images/testPlaneamiento.png" alt="libro abierto con lápiz encima, test de planeamiento">
-        <h3 class="test-off">PLANEAMIENTO</h3>
-      </div>
-    </div>
-  </figure>
+    </figure>
 </div>

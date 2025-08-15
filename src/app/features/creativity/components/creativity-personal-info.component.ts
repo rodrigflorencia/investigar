@@ -1,16 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule, Location } from '@angular/common';
-import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { CreativityFirestoreService } from 'src/app/features/creativity/services/creativity.service';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { MatIconModule } from '@angular/material/icon';
-import { Gender, EducationLevel } from '../../../shared/constants';
-import { UserPersonalInfo } from '../../../shared/models/personal-info.model';
+import { Location } from '@angular/common';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+
+import { Gender, EducationLevel, CreativeUser } from '../models/creativity.models';
+import { COLLECTIONS } from 'src/app/data/collections';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @Component({
     selector: 'creativity-personal-info',
@@ -18,15 +13,8 @@ import { UserPersonalInfo } from '../../../shared/models/personal-info.model';
     styleUrls: ['creativity-personal-info.component.scss'],
     standalone: true,
     imports: [
-        CommonModule,
-        RouterModule,
-        ReactiveFormsModule,
-        MatButtonModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatSelectModule,
-        MatIconModule
+
+        SharedModule,
     ]
 })
 
@@ -51,7 +39,7 @@ export class PersonalInfoComponent implements OnInit {
         this.personalInfoFormGroup = this._buildPersonalInfoFormGroup();
     }
     ngOnInit(): void {
-        localStorage.removeItem('creative-user');
+        localStorage.removeItem(COLLECTIONS.CREATIVITY_USERS);
     }
 
 
@@ -62,7 +50,7 @@ export class PersonalInfoComponent implements OnInit {
     onSaveForm($event: any) {
 
         if (this.personalInfoFormGroup.valid) {
-            const formData: UserPersonalInfo = this.personalInfoFormGroup.value;
+            const formData: CreativeUser = this.personalInfoFormGroup.value;
 
             // Create a creative user object with the form data
             const creativeUser = {
@@ -72,7 +60,7 @@ export class PersonalInfoComponent implements OnInit {
             };
 
             // Save the user data to local storage
-            localStorage.setItem('creative-user', JSON.stringify(creativeUser));
+            localStorage.setItem(COLLECTIONS.CREATIVITY_USERS, JSON.stringify(creativeUser));
 
             // Navigate to the next route defined in the route data
             const nextRoute = this._route.snapshot.data['nextRoute'] || '/creativity/test';

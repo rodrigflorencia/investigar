@@ -1,42 +1,39 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
-import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material/icon';
 
 import { FooterComponent } from 'src/app/layout/footer/footer.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule, 
-    MatCardModule,
-    MatIconModule,
-    FooterComponent,
-  ],
-  templateUrl: './home.page.html',
-  styleUrls: ['./home.page.scss'],
-})
-export class HomePage {
-  constructor() {}
+    selector: 'app-home',
+    standalone: true,
+    imports: [
 
-  goITBA() {
-    window.open('https://www.itba.edu.ar/');
-  }
-  goIBCN() {
-    window.open('http://www.ibcn.fmed.uba.ar/');
-  }
-  goUNICEN() {
-    window.open('http://www.unicen.edu.ar/');
-  }
-  goMediaLab() {
-    window.open('http://medialab.com.ar/');
-  }
-  goTuxdi() {
-    window.open(' https://tuxdi.com/');
-  }
+        RouterModule,
+        SharedModule,
+        FooterComponent,
+    ],
+    templateUrl: './home.page.html',
+    styleUrls: ['./home.page.scss'],
+})
+export class HomeComponent {
+    constructor() { }
+
+    goITBA() {
+        window.open('https://www.itba.edu.ar/');
+    }
+    goIBCN() {
+        window.open('http://www.ibcn.fmed.uba.ar/');
+    }
+    goUNICEN() {
+        window.open('http://www.unicen.edu.ar/');
+    }
+    goMediaLab() {
+        window.open('http://medialab.com.ar/');
+    }
+    goTuxdi() {
+        window.open(' https://tuxdi.com/');
+    }
 
 }

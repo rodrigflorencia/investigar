@@ -3,47 +3,38 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-// Material Modules
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatCardModule } from '@angular/material/card';
-import { MatRadioModule } from '@angular/material/radio';
+
+
 
 // Material Module
-import { MaterialModule } from './material/material.module';
+import { MaterialModule } from './material.module';
+import { CarouselComponent } from './ui/carousel.component';
+
+
 
 @NgModule({
-  declarations: [
-    // Only non-standalone components should be declared here
-  ],
-  exports: [
-    // Modules
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MaterialModule,
+    declarations: [
 
-    // Material Modules
-    MatToolbarModule,
-    MatButtonModule,
-    MatIconModule,
-    MatCardModule,
-    MatRadioModule,
+        // Only non-standalone components should be declared here
+    ],
+    exports: [
+        // Modules
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MaterialModule,
+        CarouselComponent,
 
-    // Pipes
-  ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MaterialModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatIconModule,
-    MatCardModule,
-    MatRadioModule,
-  ],
+        // Pipes
+    ],
+    imports: [
+        CommonModule,
+        RouterModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MaterialModule,
+        CarouselComponent,
+
+    ],
 })
-export class SharedModule {}
+export class SharedModule { }

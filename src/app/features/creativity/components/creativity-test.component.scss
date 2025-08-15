@@ -4,7 +4,6 @@
     height: 100%;
     min-height: 900px;
 }
-
 .container {
     display: flex;
     justify-content: center;
@@ -14,14 +13,13 @@
 
 h1.countdown {
     font-size: 200px;
-    color: #e33b88;
+    color: #e33b88;    
 }
-
 .container-countdown {
     border-radius: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center;  
 }
 
 .test-name {
@@ -36,7 +34,7 @@ section.container {
     flex-direction: row;
     width: 100%;
 }
-
+ 
 .line-test {
     margin-left: 70px;
     color: #4a4067;
@@ -53,6 +51,7 @@ section.container {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
 }
 
 // CLOCK STYLE
@@ -60,17 +59,13 @@ h1.clock {
     font-size: xx-large;
     margin: 20px 0px 20px 0px;
 }
-
 .container-clock-finalized {
     background-color: #4a4067;
 }
-
 .container-clock {
     background-color: #76ad2e;
 }
-
-.container-clock-finalized,
-.container-clock {
+.container-clock-finalized, .container-clock {
     padding: 0px 3px 12px 3px;
     text-align: center;
     color: white;
@@ -84,7 +79,6 @@ h1.clock {
     position: relative;
     top: 15px
 }
-
 p.text-button {
     margin: 0px;
 }
@@ -97,12 +91,10 @@ img {
 }
 
 h1.title {
-    font-weight: 100;
-    font-size: 2em;
+    font-weight: 100; font-size: 2em; 
     color: #4a4067;
 }
-
-h1>span {
+h1>span{
     font-weight: 400;
 }
 
@@ -112,8 +104,8 @@ article.container-message {
     justify-content: center;
     align-items: left;
     flex-direction: column;
-    width: 306px;
-    height: 340px;
+    width: 306px;  
+    height: 340px; 
     text-align: center;
     background-color: #ffffff;
     border-radius: 10px 10px 0px 0px;
@@ -124,19 +116,17 @@ article.container-message {
 }
 
 p.message {
-    font-weight: normal;
-    color: #4a4067;
+    font-weight: normal;  
+    color: #4a4067; 
     font-size: medium;
     margin-bottom: 4px;
 }
-
 h1.message-final {
     color: #e33b88;
     font-size: 30px;
     margin-top: 10px;
     margin-bottom: 20px;
 }
-
 h2.result {
     color: #ffcf02;
     margin-bottom: 0px;
@@ -148,20 +138,17 @@ h2.result {
     width: 100px;
     height: 100px;
 }
-
 .timer-icon {
     font-size: 50px;
     color: #4a4067;
     margin-top: 40px;
 }
-
 .timer-message {
     color: #4a4067;
     font-size: 16px;
     font-weight: normal;
     margin: 0px;
 }
-
 .label-test {
     font-weight: 500;
     font-size: 15px;
@@ -175,26 +162,24 @@ span.mat-button-wrapper {
     position: absolute;
     right: 50px;
 }
-
-.backToInit:hover,
-.desert:hover {
+  
+.backToInit:hover, .desert:hover {
     background-color: #ffffffcc;
     -webkit-box-shadow: inset 0 0 0 2px #ffcf02;
     -moz-box-shadow: inset 0 0 0 2px #ffcf02;
     box-shadow: inset 0px 0px 0px 2px #ffcf02;
 }
 
-.backToInit,
-.desert {
-    background-color: #ffffff;
+.backToInit, .desert { 
+    background-color: #ffffff;   
     font-size: medium;
-    font-weight: 600;
+    font-weight: 600; 
     color: #e33b88;
-    padding: 5px 40px 5px 40px;
-    margin-bottom: 0px;
+    padding: 5px 40px 5px 40px; 
+    margin-bottom: 0px; 
 }
 
-span.enter {
+span.enter { 
     font-style: oblique;
 }
 
@@ -207,13 +192,13 @@ span.enter {
 .container-right {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; 
     flex-direction: column;
 }
 
 // PROPOSAL
 .textarea-test {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif;    
     font-size: 16px;
     width: 286px;
     max-width: 286px;
@@ -225,11 +210,9 @@ span.enter {
     padding: 10px;
     color: #4a4067;
 }
-
 .textarea-test:focus {
     outline: none !important;
 }
-
 article.container-textarea {
     display: flex;
     justify-content: center;
@@ -245,12 +228,10 @@ article.container-textarea {
     max-width: 500px;
     width: 100%;
 }
-
+  
 .mat-form-field-infix .ng-tns-c91-0 {
     width: auto;
 }
-
-// ALERT
 
 section.container-alert {
     background-color: #ffffff;
@@ -272,32 +253,27 @@ section.container-alert {
 }
 
 .positive {
-    background-color: #76ad2e;
+     background-color: #76ad2e;
 }
 
 .negative {
     background-color: #af3434;
 }
-
-.positive,
-.negative {
+.positive , .negative {
     margin: 10px;
     color: #ffffff;
     padding-top: 3px;
     margin-bottom: 0px !important;
 }
-
 .positive:hover {
     background-color: #76ad2ecc;
 }
-
 .negative:hover {
     background-color: #af3434cc;
 }
 
-h4.message,
-p.message {
-    margin: 0px;
+h4.message, p.message {
+    margin:0px;
 }
 
 @media screen and (max-width: 1440px) {
@@ -313,52 +289,43 @@ p.message {
     }
 
     h1.countdown {
-        margin-top: 100px;
-        margin-bottom: 50px;
-    }
-
+        margin-top: 100px; 
+        margin-bottom: 50px;   
+     }
     h1.title {
-        font-weight: 100;
-        font-size: 1.6em;
-        margin-top: 40px;
+        font-weight: 100; 
+        font-size: 1.6em; 
+        margin-top: 40px;  
         width: 440px;
     }
-
     h2.result {
-
+        
         font-size: 20px;
     }
-
-    img.element,
-    img.image-final {
+    img.element, img.image-final {
         width: 71%;
         height: 71%;
     }
-
     img.emoyi {
-        width: 80px;
-        height: 80px;
+     width: 80px;
+     height: 80px;
     }
-
-    article.container-message {
-        width: 266px;
-        height: 288px;
+    article.container-message {      
+        width: 266px;       
+        height: 288px; 
         margin-top: 0px;
-        top: 78px;
+        top: 78px;      
     }
-
     .timer-icon {
-        font-size: 30px;
+        font-size: 30px;        
         margin-top: 14px;
     }
-
-    .timer-message {
-        font-size: 14px;
-        margin-bottom: 70px;
+    .timer-message {      
+        font-size: 14px; 
+        margin-bottom: 70px;     
     }
-
     .textarea-test {
-        font-family: 'Roboto', sans-serif;
+        font-family: 'Roboto', sans-serif;    
         font-size: 16px;
         width: 250px;
         max-width: 250px;
@@ -370,50 +337,42 @@ p.message {
         padding: 10px;
         color: #4a4067;
     }
-
-    .container-clock-finalized,
-    .container-clock {
+    .container-clock-finalized, .container-clock {      
         width: 263px;
         height: 108px;
         padding-bottom: 20px;
     }
-
     h1.clock {
         font-size: 30px;
         margin: 20px 0px 14px 0px;
     }
-
     h1.message-final {
         font-size: 24px;
         margin-top: 10px;
-        margin-bottom: 10px;
+        margin-bottom: 10px;  
     }
-
-    .backToInit,
-    .desert {
+    .backToInit, .desert {          
         font-size: small;
-        padding: 3px 30px 3px 30px;
+        padding: 3px 30px 3px 30px; 
     }
-
-    section.container-alert {
+    section.container-alert {     
         width: 270px;
-        height: 128px;
+        height: 128px;      
         top: 16px;
         padding-bottom: 0px !important;
-
+      
     }
-
+    
     .message {
         position: relative;
-        bottom: 5px;
+        bottom: 5px;   
     }
-
-    .positive,
-    .negative {
+    
+    .positive , .negative {
         margin: 5px;
         padding-top: 0px;
         margin-bottom: 0px !important;
-        font-size: small;
+        font-size: small;    
     }
 
 }
@@ -427,8 +386,8 @@ p.message {
     .container-element {
         position: relative;
         left: 5px;
-    }
-
+    }   
+  
 }
 
 @media screen and (max-width: 800px) {
@@ -437,23 +396,19 @@ p.message {
         width: 50%;
         height: 350px;
     }
-
     .container-element {
         margin-left: 50px;
     }
-
     .container-right {
         margin-right: 50px;
     }
-
     h1.title {
         margin-bottom: 10px;
     }
-
     .mat-button-wrapper {
         font-size: 13px !important;
     }
-
+    
     .swiper-slide,
     .swiper-slide-activel {
         height: 300px;
@@ -464,41 +419,35 @@ p.message {
     .container-all {
         min-height: 950px;
     }
-
     .container {
         display: grid !important;
         justify-content: center;
         width: 400px;
     }
-
     h1.title {
         margin: 20px 0px;
         font-size: 1.2rem;
         width: 320px;
         text-align: center;
     }
-
     .container-right {
         height: 300px;
         margin: 0px;
         top: 0px;
     }
-
     p.message {
         padding-top: 20px;
     }
-
-    section.container-alert {
+    section.container-alert {     
         width: 270px;
-        height: 108px;
+        height: 108px;      
         top: 16px;
         padding-bottom: 20px !important;
-
+      
     }
-
     .container-element {
         width: 375px;
-        display: flex;
+        display: flex  ;
         justify-content: center;
         align-items: center;
         flex-direction: column;
@@ -513,15 +462,13 @@ p.message {
     .container-all {
         width: 375px;
     }
-
     h1.title {
         width: 375px;
     }
-
+    
     .container-button {
         margin-bottom: 20px;
     }
-
     p.message {
         margin-top: 20px;
     }
@@ -531,24 +478,23 @@ p.message {
     .container-all {
         width: 320px;
     }
-
     h1.title {
         width: 315px;
     }
-
     h1.countdown {
         margin-top: 60px;
     }
-
     .container-element {
         width: 320px;
     }
-
-    img.element,
-    img.image-final {
+    img.element, img.image-final {
         margin: auto;
         width: 83%;
     }
-
+    
 
 }
+    
+
+
+ 
