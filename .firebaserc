@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "investigar-webapp",
+    "investigar": "investigar-webapp"
+  },
+  "targets": {},
+  "etags": {}
+}

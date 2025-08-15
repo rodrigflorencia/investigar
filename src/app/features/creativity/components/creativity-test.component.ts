@@ -26,7 +26,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     styleUrls: ['./creativity-test.component.scss'],
 })
 
-export class CreativityTestPage implements OnInit, OnDestroy {
+export class CreativityTestPage implements OnInit {
     private readonly router = inject(Router);
     private readonly store = inject(CreativityStore);
     private readonly repo = inject(CreativityRepo);
@@ -59,7 +59,7 @@ export class CreativityTestPage implements OnInit, OnDestroy {
         id: 1,
         name: 'Creatividad',
     };
-    user: CreativeUser | null = null;
+    user: CreativeUser;
     points = 0;
     minRandom = 0;
     maxRandom = 2;
@@ -87,9 +87,6 @@ export class CreativityTestPage implements OnInit, OnDestroy {
         this.startCountdown();
     }
 
-    ngOnDestroy(): void {
-        this.timerSubscription?.unsubscribe();
-    }
 
     getUserFromStorage(): CreativeUser | null {
         const creativeUser = localStorage.getItem('creative-user');
@@ -150,13 +147,16 @@ export class CreativityTestPage implements OnInit, OnDestroy {
         }
     }
     validProposal(arrayProposal: string | any[], empty: any) {
-        // eslint-disable-next-line @typescript-eslint/prefer-for-of
+
+        this.user.proposal = [];
         for (let i = 0; i < arrayProposal.length; i++) {
             const proposal = arrayProposal[i];
             if (proposal !== empty) {
                 this.finalProposals.push(proposal);
             }
         }
+
+
         return this.finalProposals;
     }
 
@@ -164,7 +164,7 @@ export class CreativityTestPage implements OnInit, OnDestroy {
         this.timerSubscription?.unsubscribe();
         this.dateEnd = new Date();
 
-        const finalProposals = this.validProposal(this.proposals.split('\n').filter(p => p.trim() !== ''), this.empty);
+        const finalProposals = this.validProposal(this.proposals.split('\n'), this.empty);
 
         if (this.user && this.element) {
             const updatedUser: CreativeUser = {
@@ -174,11 +174,14 @@ export class CreativityTestPage implements OnInit, OnDestroy {
                 dateStart: this.dateStart,
                 dateEnd: this.dateEnd,
             };
-            await this.repo.saveContact(updatedUser);
-        }
 
-        localStorage.removeItem('creative-user');
+            this.repo.saveContact(updatedUser);
+
+        }
+        this.points = finalProposals.length;
+        localStorage.clear();
         this.store.clearState();
+
         // Aquí podría navegar a una página de agradecimiento
         // this.router.navigate(['/thank-you']);
     }

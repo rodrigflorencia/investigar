@@ -36,7 +36,7 @@ export class CreativityRepo {
     }
 
     getCreativityMetadataCounter() {
-        const ref = doc(this._metadataCollectionRef, 'tests-counter');
+        const ref = doc(this._metadataCollectionRef, 'test-counter');
         return getDoc(ref);
     }
 
@@ -89,7 +89,7 @@ export class CreativityRepo {
     }
 
     private _incrementUserCounter(): Promise<void> {
-        const ref = doc(this._metadataCollectionRef, 'tests-counter');
+        const ref = doc(this._metadataCollectionRef, 'test-counter');
         return updateDoc(ref, {
             count: increment(1),
         });
