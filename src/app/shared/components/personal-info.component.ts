@@ -38,8 +38,11 @@ export class PersonalInfoComponent implements OnInit {
   ) {
     this.personalInfoFormGroup = this._buildPersonalInfoFormGroup();
   }
+    ngOnInit(): void {
+        throw new Error('Method not implemented.');
+    }
 
-  ngOnInit(): void {}
+
 
   back(): void {
     this._location.back();

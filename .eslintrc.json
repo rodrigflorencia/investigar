@@ -1,0 +1,131 @@
+{
+    "root": true,
+    "ignorePatterns": [
+        "projects/**/*",
+        "dist/**/*",
+        "node_modules/**/*"
+    ],
+    "overrides": [
+        {
+            "files": [
+                "*.ts"
+            ],
+            "parserOptions": {
+                "project": [
+                    "tsconfig.json"
+                ],
+                "createDefaultProgram": true
+            },
+            "extends": [
+                "eslint:recommended",
+                "plugin:@typescript-eslint/recommended",
+                "plugin:@angular-eslint/recommended",
+                "plugin:@angular-eslint/template/process-inline-templates"
+            ],
+            "rules": {
+                // Angular specific
+                "@angular-eslint/component-class-suffix": [
+                    "error",
+                    {
+                        "suffixes": ["Component", "Page", "Directive", "Dialog", "Modal"]
+                    }
+                ],
+                "@angular-eslint/directive-class-suffix": "off",
+                "@angular-eslint/component-selector": [
+                    "error",
+                    {
+                        "type": "element",
+                        "prefix": "app",
+                        "style": "kebab-case"
+                    }
+                ],
+                "@angular-eslint/no-empty-lifecycle-method": "warn",
+                "@angular-eslint/use-lifecycle-interface": "warn",
+                // TypeScript
+                "@typescript-eslint/explicit-member-accessibility": "off",
+                "@typescript-eslint/member-ordering": "off",
+                "@typescript-eslint/no-explicit-any": ["warn", { "ignoreRestArgs": true }],
+                "@typescript-eslint/no-unused-vars": [
+                    "warn",
+                    {
+                        "argsIgnorePattern": "^_",
+                        "varsIgnorePattern": "^_",
+                        "caughtErrorsIgnorePattern": "^_"
+                    }
+                ],
+                "@typescript-eslint/ban-types": [
+                    "error",
+                    {
+                        "types": {
+                            "String": {
+                                "message": "Use string instead"
+                            },
+                            "{}": false
+                        }
+                    }
+                ],
+                "@typescript-eslint/naming-convention": [
+                    "warn",
+                    {
+                        "selector": "default",
+                        "format": ["camelCase"],
+                        "leadingUnderscore": "allow"
+                    },
+                    {
+                        "selector": "variable",
+                        "format": ["camelCase", "UPPER_CASE", "PascalCase"],
+                        "leadingUnderscore": "allow"
+                    },
+                    {
+                        "selector": "typeLike",
+                        "format": ["PascalCase"]
+                    },
+                    {
+                        "selector": "enumMember",
+                        "format": ["PascalCase", "UPPER_CASE", "camelCase"],
+                        "leadingUnderscore": "allow"
+                    },
+                    {
+                        "selector": "property",
+                        "format": [
+                            "camelCase",
+                            "PascalCase",
+                            "UPPER_CASE"
+                        ],
+                        "leadingUnderscore": "allow"
+                    }
+                ],
+                "@typescript-eslint/adjacent-overload-signatures": "warn",
+                "@typescript-eslint/no-empty-function": [
+                    "error",
+                    {
+                        "allow": [
+                            "constructors",
+                            "methods"
+                        ]
+                    }
+                ],
+                // General
+                "no-underscore-dangle": "off",
+                "eqeqeq": ["warn", "always", {"null": "ignore"}],
+                "semi": ["error", "always"],
+                "max-len": ["warn", {"code": 140, "ignoreUrls": true, "ignoreStrings": true, "ignoreTemplateLiterals": true}],
+                "prefer-const": "warn",
+                "no-console": ["warn", {"allow": ["warn", "error"]}],
+                "no-unused-expressions": "off"
+            }
+        },
+        {
+            "files": [
+                "*.html"
+            ],
+            "extends": [
+                "plugin:@angular-eslint/template/recommended"
+            ],
+            "rules": {
+                "@angular-eslint/template/eqeqeq": "warn",
+                "max-len": "off"
+            }
+        }
+    ]
+}

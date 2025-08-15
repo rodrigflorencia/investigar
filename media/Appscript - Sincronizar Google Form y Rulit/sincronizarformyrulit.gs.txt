@@ -1,0 +1,137 @@
+const FIREBASE_URL = "https://investigar-webapp.firebaseio.com";
+const PROJECT_ID = "investigar-webapp"; 
+const PRIVATE_KEY = `-----BEGIN PRIVATE KEY-----\nMIIEvCCrp7U=\n-----END PRIVATE KEY-----\n`; 
+const CLIENT_EMAIL = "firebas...@investigar-webapp.iam.gserviceaccount.com";
+
+function exportarFirestoreASheets() {
+  const url = `https://firestore.googleapis.com/v1/projects/${PROJECT_ID}/databases/(default)/documents/rulit-users`;
+  const jwt = createJwtToken();
+  const headers = { Authorization: `Bearer ${jwt}` };
+
+  const response = UrlFetchApp.fetch(url, { method: 'get', headers });
+  const data = JSON.parse(response.getContentText());
+  const docs = data.documents || [];
+
+  const hoja = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("rulit-users") || SpreadsheetApp.getActiveSpreadsheet().insertSheet("rulit-users");
+  
+  const encabezados = ["email", "name", "userId", "trainingDate"];
+  for (let i = 0; i <= 10; i++) {
+      encabezados.push(`shortMemoryTest_${i}_totalExerciseTime`);
+      encabezados.push(`shortMemoryTest_${i}_totalIncorrectMoves`);
+    }
+  encabezados.push("testDate") ;
+   encabezados.push("longMemoryTest_0_totalExerciseTime");
+  encabezados.push("longMemoryTest_0_totalIncorrectMoves") ;
+  encabezados.push("longMemoryTest_1_totalExerciseTime") ;
+  encabezados.push("longMemoryTest_1_totalIncorrectMoves")
+  // Si la hoja está vacía, escribir encabezados
+  if (hoja.getLastRow() === 0) {
+    
+    hoja.appendRow(encabezados);
+  }
+
+  // Leer userIds existentes (columna 3, índice 3 en Apps Script)
+  const datos = hoja.getDataRange().getValues();
+  const userIdsExistentes = new Map(); // userId => row index
+  for (let i = 1; i < datos.length; i++) {
+    const userId = datos[i][2]; // columna userId
+    if (userId) userIdsExistentes.set(userId, i + 1); // fila real (1-based)
+  }
+
+  for (let doc of docs) {
+    const fields = doc.fields || {};
+    const userId = getField(fields["userId"]);
+    if (!userId) continue;
+
+    const nextTest = getField(fields["nextTest"]);
+    const testDate = getField(fields["testDate"]);
+    const longMem = fields["longMemoryTest"]?.arrayValue?.values || [];
+
+    // Armar datos de actualización si corresponde
+    const long0 = longMem[0]?.mapValue?.fields || {};
+    const long1 = longMem[1]?.mapValue?.fields || {};
+
+    const longFields = [
+      getField(long0["totalExerciseTime"]),
+      getField(long0["totalIncorrectMoves"]),
+      getField(long1["totalExerciseTime"]),
+      getField(long1["totalIncorrectMoves"])
+    ];
+
+    // Si userId existe, actualizar si corresponde
+    if (userIdsExistentes.has(userId)) {
+      const fila = userIdsExistentes.get(userId);
+      const testDateSheet = hoja.getRange(fila, encabezados.indexOf("testDate") + 1).getValue();
+
+      if ((!nextTest || nextTest === "no_next_test") && !testDateSheet) {
+        hoja.getRange(fila, encabezados.indexOf("testDate") + 1).setValue(testDate);
+        hoja.getRange(fila, encabezados.indexOf("longMemoryTest_0_totalExerciseTime") + 1).setValue(longFields[0]);
+        hoja.getRange(fila, encabezados.indexOf("longMemoryTest_0_totalIncorrectMoves") + 1).setValue(longFields[1]);
+        hoja.getRange(fila, encabezados.indexOf("longMemoryTest_1_totalExerciseTime") + 1).setValue(longFields[2]);
+        hoja.getRange(fila, encabezados.indexOf("longMemoryTest_1_totalIncorrectMoves") + 1).setValue(longFields[3]);
+        Logger.log(`Actualizado userId: ${userId}`);
+      } else {
+        Logger.log(`Sin cambios para userId: ${userId}`);
+      }
+      continue;
+    }
+
+    // Si userId NO existe, agregar fila completa
+    const nuevaFila = [
+      getField(fields["email"]),
+      getField(fields["name"]),
+      userId,
+      getField(fields["trainingDate"]),
+    ];
+
+    const smt = fields["shortMemoryTest"]?.arrayValue?.values || [];
+    for (let i = 0; i <= 10; i++) {
+      const item = smt[i]?.mapValue?.fields || {};
+      nuevaFila.push(getField(item["totalExerciseTime"]));
+      nuevaFila.push(getField(item["totalIncorrectMoves"]));
+    }
+
+    nuevaFila.push(testDate);
+    nuevaFila.push(...longFields);
+
+    hoja.appendRow(nuevaFila);
+    Logger.log(`Agregado nuevo userId: ${userId}`);
+  }
+}
+
+function getField(obj) {
+  if (!obj) return "";
+  const tipo = Object.keys(obj)[0];
+  return obj[tipo];
+}
+
+function createJwtToken() {
+  const now = Math.floor(Date.now() / 1000);
+  const claims = {
+    iss: CLIENT_EMAIL,
+    scope: "https://www.googleapis.com/auth/datastore",
+    aud: "https://oauth2.googleapis.com/token",
+    exp: now + 3600,
+    iat: now
+  };
+
+  const jwtHeader = { alg: "RS256", typ: "JWT" };
+  const base64Encode = (o) => Utilities.base64EncodeWebSafe(JSON.stringify(o));
+  const header = base64Encode(jwtHeader);
+  const payload = base64Encode(claims);
+  const signatureInput = `${header}.${payload}`;
+  const signatureBytes = Utilities.computeRsaSha256Signature(signatureInput, PRIVATE_KEY);
+  const signature = Utilities.base64EncodeWebSafe(signatureBytes);
+  const jwt = `${signatureInput}.${signature}`;
+
+  const tokenResponse = UrlFetchApp.fetch("https://oauth2.googleapis.com/token", {
+    method: "post",
+    payload: {
+      grant_type: "urn:ietf:params:oauth:grant-type:jwt-bearer",
+      assertion: jwt
+    }
+  });
+
+  const accessToken = JSON.parse(tokenResponse.getContentText()).access_token;
+  return accessToken;
+}
