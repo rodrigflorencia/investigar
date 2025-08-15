@@ -42,3 +42,10 @@ package-lock.json
 docker*
 .editorconfig
 /.firebase
+/firestore.rules
+/firestore.indexes.json
+/firebase-debug.log
+/firebase.json
+.firebaserc
+.gitignore
+

@@ -14,6 +14,12 @@ Cada _test_ está integrado en la aplicación como un módulo separado, lo que p
 
 Esta guía se complementa con la documentación disponible en la [carpeta](media).
 
+Actualmente la app está disponible en
+
+ <https://investigapp-ec690.web.app>
+
+ <https://investigar-webapp.web.app/home>
+
 ## Arquitectura de la aplicación
 
 La arquitectura de Investig.ar sigue una estructura **multicapa** típica de aplicaciones Angular modernas, apoyada en servicios de Firebase como _backend_. A alto nivel, el flujo es el siguiente:
