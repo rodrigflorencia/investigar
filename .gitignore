@@ -47,5 +47,4 @@ docker*
 /firebase-debug.log
 /firebase.json
 .firebaserc
-/src/app/encode
 

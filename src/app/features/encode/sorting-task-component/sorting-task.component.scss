@@ -1,0 +1,40 @@
+.main-app-section {
+    margin-left: 2rem 0rem;
+}
+
+#task-breafing {
+    display: flex;
+    flex-flow: column;
+    row-gap: 2rem;
+    max-width: 32rem;
+    line-height: 1.32rem;
+    align-items: center;
+}
+
+button {
+    align-self: center;
+}
+
+.finish-task-button {
+    margin-top: 4rem;
+}
+
+#screenshots-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap:16px;
+    max-width: 80rem;
+}
+
+.mat-list {
+    display: flex;
+    flex-flow: column;
+    row-gap: 0.5rem;
+}
+
+.mat-list .mat-list-icon {
+    width: 0.5rem;
+    height: 0.5rem;
+    font-size: 0.5rem;
+}
+  

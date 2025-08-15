@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>¿Quieres salir del test?</h1>
+<div mat-dialog-content>
+    <h4>Tus respuestas se perderan y no podras volver a entrar.</h4>
+</div>
+<div class="mat-dialog-actions">
+    <button mat-button
+        (click)="onClose(true)">
+        Si
+    </button>
+    <button mat-button
+        (click)="onClose(false)"
+        cdkFocusInitial>
+        No
+    </button>
+</div>

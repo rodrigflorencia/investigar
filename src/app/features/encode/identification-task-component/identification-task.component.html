@@ -1,0 +1,22 @@
+<section class="container">
+  <app-header-encode></app-header-encode>
+  <section class="main-app-section">
+
+    <div identificationRoomHost>
+      @if (isLoadingLineups) {
+        <div
+          id="loading-spinner">
+          <mat-spinner [diameter]="64"></mat-spinner>
+          @if (this.currentRoom == 1) {
+            <p>Cargando Ronda 1...</p>
+          }
+          @if (this.currentRoom == 2) {
+            <p>Cargando Ronda 2...</p>
+          }
+        </div>
+      }
+    </div>
+
+  </section>
+
+</section>

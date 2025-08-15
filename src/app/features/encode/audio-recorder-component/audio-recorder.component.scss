@@ -1,0 +1,41 @@
+.recorder
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.75rem;
+    column-gap: 1.5rem;
+    background-color: #4a40670c;
+    border-radius: 1000px;
+    width: 20rem;
+}
+
+.recorder-display
+{
+    padding: 16px;
+    text-align: center;
+    border-radius: 6px;
+    min-width: 160px;
+}
+
+.recorder-display.recording * {
+    color: #e33b88;
+}
+
+button * {
+    color: whitesmoke;
+}
+
+.mat-button-base
+{
+    width: 80px !important;
+    height: 80px !important;
+}
+
+.mat-icon {
+    transform: scale(1.64);
+}
+
+.cdk-overlay-pane {
+    max-width: 580px;
+}

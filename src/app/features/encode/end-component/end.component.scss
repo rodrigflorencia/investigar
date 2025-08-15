@@ -1,0 +1,51 @@
+.end-message
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.end-card
+{
+    max-width: 56rem;
+    margin-top: 1rem;
+}
+
+.end-card-content
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1rem;
+}
+
+.end-card-content > img
+{
+    width: 100%;
+}
+
+.right-column
+{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+}
+
+.right-column p {
+    font-size: 16px;
+    line-height: 1.4rem;
+}
+
+.btn
+{
+    margin-top: 2rem;
+}
+
+.save-form-btn {
+    align-self: center;
+    margin-top: 2rem;
+}
+
+.mat-list .mat-list-icon {
+    width: 0.5rem;
+    height: 0.5rem;
+    font-size: 0.5rem;
+}

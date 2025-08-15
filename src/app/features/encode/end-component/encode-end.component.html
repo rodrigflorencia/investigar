@@ -1,0 +1,71 @@
+<section class="container">
+  <app-header-encode></app-header-encode>
+  <section class="main-app-section">
+
+    <div class="end-message">
+
+      @if (currentSession == sessionsEnum.SessionOne) {
+        <h1>¡Muchas gracias por participar {{ userName }}!</h1>
+      }
+      @if (currentSession == sessionsEnum.SessionTwo) {
+        <h1>¡Eso fue todo!</h1>
+      }
+
+      <mat-card class="end-card">
+
+        <mat-card-content class="end-card-content">
+
+          <img class="image-instructions"
+            src="assets/images/final-message.jpg" alt=""/>
+
+          <div class="right-column">
+
+            @if (currentSession == sessionsEnum.SessionOne) {
+              <mat-list>
+                <mat-list-item>
+                  <mat-icon mat-list-icon
+                  color="accent">lens</mat-icon>
+                  <p class="mat-list-text">
+                    Tenés que volver a conectarte dentro de 7 días.
+                  </p>
+                </mat-list-item>
+                <mat-list-item>
+                  <mat-icon mat-list-icon
+                  color="accent">lens</mat-icon>
+                  <p class="mat-list-text">
+                    Ese día te va a llegar automáticamente un mail con el link donde tenes que entrar. <br/>
+                  </p>
+                </mat-list-item>
+                <mat-list-item>
+                  <mat-icon mat-list-icon
+                  color="accent">lens</mat-icon>
+                  <p class="mat-list-text">
+                    Hasta ese entonces, te vamos a pedir que por favor no comentes con nadie lo que hiciste hoy.
+                  </p>
+                </mat-list-item>
+              </mat-list>
+            }
+
+            @if (currentSession == sessionsEnum.SessionTwo) {
+              <div>
+                <p>
+                  De parte de todxs lxs integrantes del Laboratorio de Sueño y Memoria te queremos agradecer por haber participado.
+                  Tu colaboración es muy importante para el avance de nuestros estudios.
+                </p>
+              </div>
+            }
+
+            <button mat-raised-button
+              class="save-form-btn"
+              (click)="goHome()">
+              Volver al inicio
+            </button>
+
+          </div>
+
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+  </section>
+</section>

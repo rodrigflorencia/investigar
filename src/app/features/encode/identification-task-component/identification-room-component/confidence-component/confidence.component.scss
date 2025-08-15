@@ -1,0 +1,58 @@
+.mat-dialog-content {
+    display: flex;
+    flex-flow: row;
+    column-gap: 2rem;
+    max-width: 44rem;
+}
+
+.mat-stroked-button {
+    height: 52px;
+    //padding: 8px;
+}
+
+.mat-dialog-actions {
+    justify-content: flex-end;
+    margin-bottom: 0px;
+    align-items: end;
+}
+
+#photoColumn {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+#photoColumn > img {
+    max-height: 285px;
+}
+
+#confidenceColumn {
+    display: grid;
+    grid-template-rows: 1fr auto;
+    width: 100%;
+}
+
+#instructions-and-slider {
+    grid-row: 1;
+    display: flex;
+    flex-flow: column;
+}
+
+#instructions-and-slider > p {
+    margin: 0 1rem;
+}
+
+.mat-slider {
+    margin: 1rem;
+}
+
+.save-form-btn {
+    grid-row: 2;
+    justify-self: flex-end;
+}
+
+.mat-list .mat-list-icon {
+    width: 0.5rem;
+    height: 0.5rem;
+    font-size: 0.5rem;
+}
