@@ -1,0 +1,82 @@
+/* Creativity Instructions Page Styles */
+
+
+:host {
+  display: block;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+
+.header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    
+    .title {
+      color: #4a4067;
+      font-size: 2.25rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+      
+      span {
+        color: #e33b88;
+        white-space: nowrap;
+      }
+    }
+    
+    .subtitle {
+      color: #6c757d;
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  }
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e9ecef;
+  
+  button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    min-width: 180px;
+    
+    mat-icon {
+      margin: 0 0.25rem;
+    }
+  }
+  
+  .button-back {
+    background-color: #f8f9fa;
+    color: #4a4067;
+    border: 1px solid #dee2e6;
+    
+    &:hover {
+      background-color: #e9ecef;
+      border-color: #ced4da;
+    }
+  }
+  
+  .button-begin {
+    background-color: #4a4067;
+    color: #ffffff;
+    
+    &:hover {
+      background-color: #3a3352;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(74, 64, 103, 0.2);
+    }
+  }
+}

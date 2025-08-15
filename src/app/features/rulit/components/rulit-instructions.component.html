@@ -1,0 +1,28 @@
+<section class="container">
+    <app-header-rulit></app-header-rulit>
+    <div class="container-instruction">
+        <div class="container-title">
+            <h1 class="title">Instrucciones de <br>
+                <span>"Aprendizaje"</span>
+            </h1>
+        </div>
+        <div class="carousel-wrapper">
+            <app-carousel [items]="carouselItems" [showArrows]="true" [showDots]="true" [autoPlay]="false">
+            </app-carousel>
+        </div>
+        <div class="button-container">
+            <button routerLink="/select-test" routerLinkActive="active" class="button-back" mat-raised-button>
+                <span class="material-icons icon-back">
+                    <mat-icon>chevron_left</mat-icon>
+                </span>
+                REGRESAR
+            </button>
+            <button (click)="onStart()" class="button-start" mat-raised-button color="primary">
+                COMENZAR
+                <span class="material-icons icon-forward">
+                    <mat-icon>chevron_right</mat-icon>
+                </span>
+            </button>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,51 @@
+
+.foto-bio {
+    border: 2px solid #ffcf02;
+    border-radius: 50%;
+    width: 10vw;
+}
+p.info {
+    margin-top: 0px;
+    line-height: 1.3rem;
+}
+
+.container-bio  {
+    margin-top: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #ffffff;
+}
+
+h2.title {
+    font-weight: 100; 
+    font-size: 1.5em; 
+    margin-top: 20px;
+    color: white;
+}
+
+@media screen and (max-width: 1024px) {
+   
+    .foto-bio {
+        width: 20vw;
+    }
+}
+@media screen and (max-width: 425px) {
+   
+    .foto-bio {
+        width: 30vw;
+    }
+    h2.title {
+        font-size: 1.3em; 
+    }
+}
+
+@media screen and (max-width: 375px) {
+   
+    .foto-bio {
+        width: 40vw;
+    }
+    
+}
+

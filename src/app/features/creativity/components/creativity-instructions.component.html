@@ -1,0 +1,29 @@
+<section class="container-instructions">
+    <app-header-creativity></app-header-creativity>
+
+    <div class="content-wrapper">
+        <div class="header">
+            <h1 class="title">Instrucciones de <span>"Usos alternativos"</span></h1>
+            <p class="subtitle">Por favor, lee atentamente las siguientes instrucciones antes de comenzar</p>
+        </div>
+
+        <div class="carousel-wrapper">
+            <app-carousel [items]="carouselItems" [showArrows]="true" [showDots]="true" [autoPlay]="false">
+            </app-carousel>
+        </div>
+
+        <div class="button-container">
+            <button routerLink="/select-test" class="button-back" mat-raised-button>
+                <mat-icon>chevron_left</mat-icon>
+                <span>REGRESAR</span>
+            </button>
+
+            <button routerLink="/creativity/personal-info" class="button-begin" color="primary" mat-raised-button>
+                <span>COMENZAR</span>
+                <mat-icon>chevron_right</mat-icon>
+            </button>
+        </div>
+    </div>
+</section>
+
+<router-outlet></router-outlet>

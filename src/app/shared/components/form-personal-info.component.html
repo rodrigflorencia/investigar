@@ -1,0 +1,129 @@
+<div class="form-container">
+    <section class="main-app-section">
+        <div class="personal-info">
+
+            <form [formGroup]="personalInfoFormGroup" (ngSubmit)="onSaveForm($event)" class="mat-typography">
+                <mat-card>
+
+                    <mat-card-header>
+                        <mat-card-title>Datos personales</mat-card-title>
+                    </mat-card-header>
+
+                    <mat-card-content class="form-fields">
+                        <mat-form-field class="full-width" appearance="fill" hideRequiredMarker="false">
+
+                            <mat-label>Edad</mat-label>
+
+                            <input type="number" required matInput formControlName="age" placeholder="18" min="18"
+                                max="100">
+
+                            @if (age.invalid && !age.hasError('required')) {
+                            <mat-error>
+                                La edad debe estar entre 18 y 100
+                            </mat-error>
+                            }
+                            @if (age.hasError('required')) {
+                            <mat-error>
+                                Edad es un dato <strong>requerido</strong>.
+                            </mat-error>
+                            }
+
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill" hideRequiredMarker="false">
+
+                            <mat-label>Género</mat-label>
+
+                            <mat-select formControlName="gender" required name="gender">
+                                <mat-option value="genders.Male">
+                                    {{genders.Male}}
+                                </mat-option>
+                                <mat-option value="genders.Female">
+                                    {{genders.Female}}
+                                </mat-option>
+                                <mat-option value="genders.NonBinary">
+                                    {{genders.NonBinary}}
+                                </mat-option>
+                            </mat-select>
+
+                            @if (gender.hasError('required')) {
+                            <mat-error>
+                                Género es un dato <strong>requerido</strong>.
+                            </mat-error>
+                            }
+
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill" hideRequiredMarker="false">
+
+                            <mat-label>Nivel educativo alcanzado</mat-label>
+
+                            <mat-select formControlName="educationLevel" required name="educationLevel">
+                                <mat-option value="educationLevels.incompleteSecondary">
+                                    {{educationLevels.incompleteSecondary}}
+                                </mat-option>
+                                <mat-option value="educationLevels.completeSecondary">
+                                    {{educationLevels.completeSecondary}}
+                                </mat-option>
+                                <mat-option value="educationLevels.incompleteTertiary">
+                                    {{educationLevels.incompleteTertiary}}
+                                </mat-option>
+                                <mat-option value="educationLevels.completeTertiary">
+                                    {{educationLevels.completeTertiary}}
+                                </mat-option>
+                                <mat-option value="educationLevels.completeTertiary">
+                                    {{educationLevels.completeTertiary}}
+                                </mat-option>
+                                <mat-option value="educationLevels.incompleteBachelors">
+                                    {{educationLevels.incompleteBachelors}}
+                                </mat-option>
+                                <mat-option value="educationLevels.completeBachelors">
+                                    {{educationLevels.completeBachelors}}
+                                </mat-option>
+                            </mat-select>
+
+                            @if (gender.hasError('required')) {
+                            <mat-error>
+                                Nivel educativo es un dato <strong>requerido</strong>.
+                            </mat-error>
+                            }
+
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill">
+                            <mat-label>Carrera en curso</mat-label>
+                            <input type="text" matInput formControlName="ongoingCareer" placeholder="Ej. Medicina">
+                        </mat-form-field>
+
+                        <mat-form-field appearance="fill">
+                            <mat-label>Ocupación</mat-label>
+                            <input type="text" matInput formControlName="occupation" placeholder="Ej. Doctor">
+
+                            @if (gender.hasError('required')) {
+                            <mat-error>
+                                Ocupación es un dato <strong>requerido</strong>.
+                            </mat-error>
+                            }
+                        </mat-form-field>
+
+                        <mat-card-actions>
+                            <button mat-stroked-button (click)="back()">
+                                Volver
+                            </button>
+                            <button mat-raised-button type="submit" class="save-form-btn">
+                                Siguiente
+                            </button>
+                        </mat-card-actions>
+
+                    </mat-card-content>
+
+                </mat-card>
+            </form>
+
+            <p class="mat-caption">
+                * La información que brindes es totalmente confidencial y solo se utilizará con fines académicos.
+            </p>
+
+        </div>
+    </section>
+</div>

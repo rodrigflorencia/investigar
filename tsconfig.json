@@ -1,0 +1,45 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+        "importHelpers": false,
+        "target": "es2015",
+        "skipLibCheck": true,
+        "allowSyntheticDefaultImports": true,
+        "baseUrl": "./",
+        "outDir": "./dist/out-tsc",
+        "sourceMap": true,
+        "declaration": false,
+        "downlevelIteration": true,
+        "experimentalDecorators": true,
+        "module": "es2020",
+        "moduleResolution": "node",
+        "lib": [
+            "es2018",
+            "dom"
+        ]
+    },
+    "paths": {
+        "@core/*": [
+            "src/app/core/*"
+        ],
+        "@shared/*": [
+            "src/app/shared/*"
+        ],
+        "@components/*": [
+            "src/app/shared/*"
+        ],
+        "@env/*": [
+            "src/environments/*"
+        ],
+        "@modules/*": [
+            "src/app/modules/*"
+        ],
+        "@layout/*": [
+            "src/app/layout/*"
+        ],
+    },
+    "angularCompilerOptions": {
+        "fullTemplateTypeCheck": true,
+        "strictInjectionParameters": true
+    }
+}

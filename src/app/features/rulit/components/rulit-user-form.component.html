@@ -1,0 +1,72 @@
+<section class="container">
+    <app-header-questionRulit></app-header-questionRulit>
+    <div class="container__component">
+
+        <form [formGroup]="userFormData" (ngSubmit)="onSaveForm($event)">
+
+            <mat-card class="shipping-card">
+
+                <mat-card-header>
+                    <mat-card-title>Datos personales</mat-card-title>
+                </mat-card-header>
+
+                <mat-card-content>
+
+                    <span>Todos los campos son requeridos</span>
+
+                    <mat-form-field class="full-width" appearance="fill" hintLabel="Máximo 30 caracteres">
+
+                        <mat-label>Nombre y Apellido</mat-label>
+
+                        <input matInput type="text" formControlName="name" maxlength="30"
+                            placeholder="Ingresá tu nombre y apellido">
+
+                        <mat-hint align="end">{{ name.value.length }}/30</mat-hint>
+
+                        @if (name.invalid && !name.hasError('required')) {
+                        <mat-error>
+                            El dato ingresado debe ser válido
+                        </mat-error>
+                        }
+                        @if (name.hasError('required')) {
+                        <mat-error>
+                            Tu nombre y apellido son un dato <strong>requerido</strong>.
+                        </mat-error>
+                        }
+
+                    </mat-form-field>
+
+                    <mat-form-field class="full-width" appearance="fill">
+
+                        <mat-label>Email</mat-label>
+
+                        <input type="email" matInput formControlName="email">
+
+                        @if (email.hasError('email') && !email.hasError('required')) {
+                        <mat-error>
+                            Please enter a valid email address
+                        </mat-error>
+                        }
+                        @if (email.hasError('required')) {
+                        <mat-error>
+                            Email is <strong>required</strong>
+                        </mat-error>
+                        }
+
+                    </mat-form-field>
+
+                    <mat-card-actions>
+                        <button mat-raised-button type="submit" class="save-form-btn">
+                            GUARDAR DATOS
+                        </button>
+                    </mat-card-actions>
+
+                </mat-card-content>
+
+            </mat-card>
+
+        </form>
+
+    </div>
+
+</section>

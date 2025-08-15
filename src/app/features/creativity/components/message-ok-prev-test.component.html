@@ -1,0 +1,26 @@
+<div class="container-all">
+    <app-header></app-header>
+    @if (load == false) {
+    <section class="container">
+        <div class="preloader"></div>
+    </section>
+    }
+    @if (load == true) {
+    <section class="container">
+        <div class="container-message">
+            <h1 mat-dialog-title class="message">¡Perfecto!</h1>
+            <span class="material-icons icon-cloud">
+                cloud_done
+            </span>
+            <h4 class="message">Tus datos fueron<br>guardados con éxito</h4>
+        </div>
+        <div class="container-button">
+            <button class="buttonInit" mat-raised-button (click)="startTest()" data-backdrop="static"
+                data-keyboard="false">
+                INICIAR PRÁCTICA
+
+            </button>
+        </div>
+    </section>
+    }
+</div>

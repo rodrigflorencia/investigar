@@ -1,0 +1,21 @@
+<div class="callback-container">
+    @if (!error && !userExists) {
+    <div class="spinner"></div>
+    }
+    @if (!error && !userExists) {
+    <p>Procesando tu información...</p>
+    }
+    @if (error || userExists) {
+    <div class="message">
+        @if (userExists) {
+        <mat-icon class="error-icon">error_outline</mat-icon>
+        }
+        <p>{{ message }}</p>
+        @if (userExists) {
+        <button mat-raised-button color="primary" (click)="navigateToTest()">
+            Volver al Inicio
+        </button>
+        }
+    </div>
+    }
+</div>

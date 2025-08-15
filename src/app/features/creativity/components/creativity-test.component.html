@@ -1,0 +1,131 @@
+@if (!started) {
+<div class="container-all">
+    <app-header-creativity class="nav"></app-header-creativity>
+    @if (countDown <= 3) { <section class="container-countdown">
+        <h1 class="countdown">{{ countDown }}</h1>
+        </section>
+        }
+</div>
+}
+
+@if (started) {
+<div class="container-all">
+    <app-header-creativity></app-header-creativity>
+    <section class="container">
+        @if (clock.state !== 'finalized') {
+        <article class="container-element">
+            <h1 class="title"><span>¿Qué usos le darías a un {{ element.name }}?</span></h1>
+            <img class="element" [src]="element.image" alt="">
+        </article>
+        }
+        @if (clock.state === 'finalized') {
+        <article class="container-element">
+            <h1 class="title"><span>¡Gracias por tu participación!</span></h1>
+            <img class="image-final" src="assets/images/final-message.jpg" alt="">
+        </article>
+        }
+        <section class="container-right">
+            @if (clock.state !== 'finalized') {
+            <article class="container-textarea">
+                <label class="label-test" for="">Presioná<span class="enter"> "Enter"<br></span>después de cada
+                    propuesta.</label>
+                <textarea [(ngModel)]="proposals" placeholder="Escribí todas las que se te ocurran."
+                    class="textarea-test">
+            </textarea>
+            </article>
+            }
+            @if (clock.state === 'finalized' && !alertDesert) {
+            <article class="container-message">
+                @if (points < 1) { <div class="message-icon">
+                    <h1 class="message-final">¿Te dormiste?</h1>
+                    <img class="emoyi" src="assets\images\emoyi_5.png" alt="emoyi dudando">
+</div>
+}
+@if (points == 1) {
+<div class="message-icon">
+    <h1 class="message-final">¿Te dormiste?</h1>
+    <img class="emoyi" src="assets\images\emoyi_5.png" alt="emoyi dudando">
+</div>
+}
+@if (points > 1 && points < 10) { <div class="message-icon">
+    <h1 class="message-final">¡Buen trabajo!</h1>
+    <img class="emoyi" src="assets\images\emoyi_2.png" alt="emoyi dudando">
+    </div>
+    }
+    @if (points >= 10 && points < 20) { <div class="message-icon">
+        <h1 class="message-final">¡Felicitaciones!</h1>
+        <img class="emoyi" src="assets\images\emoyi_1.png" alt="emoyi dudando">
+        </div>
+        }
+        @if (points >= 20 && points < 30) { <div class="message-icon">
+            <h1 class="message-final">¡Excelente!</h1>
+            <img class="emoyi" src="assets\images\emoyi_3.png" alt="emoyi dudando">
+            </div>
+            }
+            @if (points >= 30) {
+            <div class="message-icon">
+                <h1 class="message-final">¡Increíble!</h1>
+                <img class="emoyi" src="assets\images\emoyi_4.png" alt="emoyi dudando">
+            </div>
+            }
+            @if (points == 1) {
+            <h2 class="result">Obtuviste {{ points }} punto</h2>
+            }
+            @if (points > 1 || points < 1) { <h2 class="result">Obtuviste {{ points }} puntos</h2>
+                }
+                <span class="material-icons timer-icon">
+                    timer
+                </span>
+                <p class="timer-message">Tiempo agotado</p>
+                </article>
+                }
+                @if (clock.state === 'started' && !alertDesert) {
+                <div class="container-clock">
+                    @if (clock.seconds < 10) { <h1 class="clock">{{ '0' + clock.minutes }} : {{ '0' + clock.seconds }}
+                        </h1>
+                        }
+                        @if (clock.seconds >= 10) {
+                        <h1 class="clock">{{ '0' + clock.minutes }} : {{ clock.seconds }}</h1>
+                        }
+                        <button mat-raised-button class="desert" (click)="activeAlert()">
+                            <p class="text-button">TERMINAR</p>
+                        </button>
+                </div>
+                }
+                @if (clock.state === 'finalized' && !alertDesert) {
+                <div class="container-clock-finalized">
+                    @if (clock.seconds < 10) { <h1 class="clock">{{ '0' + clock.minutes }} : {{ '0' + clock.seconds }}
+                        </h1>
+                        }
+                        @if (clock.seconds >= 10) {
+                        <h1 class="clock">{{ '0' + clock.minutes }} : {{ clock.seconds }}</h1>
+                        }
+                        <button mat-raised-button class="backToInit" routerLink="/select-test"
+                            routerLinkActive="active">
+                            VOLVER A INICIO
+                        </button>
+                </div>
+                }
+                @if (clock.state === 'started' && alertDesert) {
+                <section class="container-alert">
+                    <div class="container-message">
+                        <p class="message">Estás a un click <br> de abandonar la actividad.</p>
+                        <h4 class="message">¿Querés abandonar?</h4>
+                    </div>
+                    <div class="container-button">
+                        <button class="negative" mat-raised-button (click)="finalizedTest()" data-backdrop="static"
+                            data-keyboard="false">
+                            ABANDONAR
+                        </button>
+                        <button class="positive" mat-raised-button (click)="activeAlert()" data-backdrop="static"
+                            data-keyboard="false">
+                            CONTINUAR
+                        </button>
+                    </div>
+                </section>
+                }
+                </section>
+                </section>
+                </div>
+                }
+                <router-outlet></router-outlet>

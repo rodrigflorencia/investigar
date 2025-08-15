@@ -1,0 +1,117 @@
+
+// Include theming for Angular Material with `mat.theme()`.
+// This Sass mixin will define CSS variables that are used for styling Angular Material
+// components according to the Material 3 design spec.
+// Learn more about theming and how to use it for your application's
+// custom components at https://material.angular.dev/guide/theming
+@use '@angular/material' as mat;
+
+html {
+  @include mat.theme((
+    color: (
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
+}
+
+body {
+  // Default the application to a light color theme. This can be changed to
+  // `dark` to enable the dark color theme, or to `light dark` to defer to the
+  // user's system settings.
+  color-scheme: light;
+
+  // Set a default background, font and text colors for the application using
+  // Angular Material's system-level CSS variables. Learn more about these
+  // variables at https://material.angular.dev/guide/system-variables
+  background-color: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  font: var(--mat-sys-body-medium);
+
+  // Reset the user agent margin.
+  margin: 0;
+}
+html, body { height: 100%; max-height: auto; }
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+// Custom Rulit Snack
+
+snack-bar-container.custom-rulit-snack-bar {
+    background-color: #fff;
+    color: #4a4067;
+}
+
+// Custom Rulit Dialog
+
+.custom-rulit-dialog .mat-dialog-title {
+    color: #312a45;
+    margin: 0 0 0.5rem;
+}
+
+.custom-rulit-dialog .dialog_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.custom-rulit-dialog .dialog_header .mat-button{
+    color: #E52F2D;
+    background-color: white;
+    padding: 0;
+    min-width: 32px;
+}
+
+.custom-rulit-dialog .mat-dialog-title .material-icons {
+    color: #ffcf02;
+    vertical-align: text-bottom;
+    margin-right: 0.5rem;
+}
+
+.custom-rulit-dialog hr{
+    border: 1px solid #ffcf02;
+}
+
+.custom-rulit-dialog .mat-dialog-content {
+    color: #312a45;
+    line-height: 1.4rem;
+}
+
+.custom-rulit-dialog mat-dialog-actions .mat-button {
+    background-color: #76ad2e;
+    color: white;
+    font-size: medium;
+    font-weight: 500;
+    padding: 0.5rem 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.custom-rulit-dialog mat-dialog-actions .mat-button:hover {
+    color: white;
+    background-color: #76ad2ecc;
+}
+
+.mat-dialog-content.orientation_content {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    column-gap: 1rem;
+}
+
+.mat-dialog-content .screen_rotation_icon {
+    font-size: 32px;
+}
+
+.backdropBackground {
+    background: rgb(0 0 0 / 89%);
+}
+
+.custom-background mat-dialog-container {
+    background-color: #4e3a3a00;
+    box-shadow: none;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

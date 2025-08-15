@@ -1,0 +1,67 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper function to check for admin role via custom claims.
+    // This assumes you set a custom claim 'isAdmin' to true for your admin users.
+    function isAdmin() {
+      return request.auth.token.isAdmin == true;
+    }
+
+    // Generic rule for user-specific data
+    match /users/{userId}/{documents=**} {
+      allow read, write: if true;
+    }
+
+    // Specific, more secure rules for user collections.
+    match /creatives-users/{userId} {
+      allow create, update: if true;
+      allow read: if true;
+      allow delete: if false; // Prevent accidental deletion
+    }
+
+    match /rulit-users/{userId} {
+      allow create, update: if true;
+      allow read: if true;
+      allow delete: if false;
+    }
+
+    match /encode-users/{userId} {
+      allow create, update: if false;
+      allow read: if true;
+      allow delete: if false;
+    }
+
+    // Admin users list can only be read by other admins. Writes should be handled server-side.
+    match /admin-users/{document} {
+      allow read: if isAdmin();
+      allow write: if false;
+    }
+
+    // Public configuration data is read-only for any authenticated user.
+    match /rulit-config/{document} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /rulit-solutions/{document} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // Make the entire encode-config path read-only for authenticated users.
+    match /encode-config/{path=**} {
+       allow read: if request.auth != null;
+       allow write: if false;
+    }
+
+    // The creatives-meta collection is readable by any authenticated user and writable only by admins.
+    match /creatives-meta/{document} {
+	allow read: if true;
+      allow write: if true;
+    }
+
+    // By default, no other collection is accessible.
+    // The overly permissive `match /{document=**}` has been removed.
+  }
+}

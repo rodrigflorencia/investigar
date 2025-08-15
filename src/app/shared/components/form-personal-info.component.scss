@@ -1,0 +1,46 @@
+.personal-info
+{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.form-fields
+{
+    display: flex;
+    flex-direction: column;
+    row-gap: 0.5rem;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.row
+{
+    display: flex;
+    flex-flow: row;
+    column-gap: 2rem;
+}
+
+.mat-card-actions {
+    display: flex;
+    justify-content: end;
+}
+
+mat-card-header {
+    justify-content: center;
+    background-color: #4a4067;
+    color: white;
+    padding: 1em;
+    margin: 0px 0 !important;
+}
+
+.mat-card-title 
+{
+    margin: 0 !important;
+    font-weight:normal;
+    color: whitesmoke;
+}
+
+.mat-card {
+    width: 32rem;
+}

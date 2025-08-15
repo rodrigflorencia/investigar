@@ -1,0 +1,30 @@
+<div class="dialog_header">
+
+  <h1 mat-dialog-title>
+    <span class="material-icons">
+      error_outline
+    </span>
+    ¡Atención!
+  </h1>
+  
+  <button mat-button class="dialog_close_btn">
+    <span align="end" class="material-icons" (click)="close()" >
+      close
+    </span>
+  </button>
+  
+</div>
+
+<hr/>
+
+<div mat-dialog-content>
+  <h3>Recordá</h3>
+  <ul>
+    <li>Siempre tenés que seguir un camino.</li>
+    <li>Sólo podés tocar circulos conectados entre sí.</li>
+  </ul>
+</div>
+
+<mat-dialog-actions align="center">
+  <button mat-button mat-dialog-close>ENTENDIDO</button>
+</mat-dialog-actions>

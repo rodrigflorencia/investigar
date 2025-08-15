@@ -1,0 +1,23 @@
+<section class="container-all">
+    <article class="container-logoAndText">
+        <div class="logo-container">
+            <img class="logo-home" src="assets/images/logo_home.svg" alt="">
+            <div class="container-button-description">
+                <h2 class="text-home">Plataforma interactiva de investigación<br>en tiempos de pandemia.</h2>
+                <button mat-raised-button class="button-home" routerLink="/select-test"
+                    routerLinkActive="active">INGRESAR</button>
+                <div class="container-moreInfo">
+                    <button routerLink="/more-info" routerLinkActive="active" class="moreInfo" mat-raised-button>
+                        <span class="material-icons">
+                            <mat-icon>info</mat-icon>
+                        </span>
+                        Más información
+                    </button>
+                </div>
+            </div>
+        </div>
+    </article>
+    <app-footer></app-footer>
+</section>
+
+<router-outlet></router-outlet>

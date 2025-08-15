@@ -1,0 +1,20 @@
+<section class="container">
+
+    @if (testStarted) {
+    <app-header-rulit></app-header-rulit>
+    }
+
+    <div class="container__component">
+
+
+        @if (! testStarted) {
+        <section #countdown>
+            <h1 class="countdown">{{ countDown }}</h1>
+        </section>
+        }
+
+        <canvas #canvas></canvas>
+
+    </div>
+
+</section>

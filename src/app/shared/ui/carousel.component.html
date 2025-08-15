@@ -1,0 +1,53 @@
+<div class="carousel-container" aria-label="Carrusel de instrucciones">
+    <div #carouselContainer class="carousel-slide" [style.transform]="'translateX(-' + (currentIndex * 100) + '%)'"
+        (keydown)="onKeyDown($event)">
+        <div *ngFor="let item of items; let i = index" class="carousel-item" [id]="'carousel-item-' + i"
+            [attr.aria-hidden]="i !== currentIndex" [attr.aria-labelledby]="'carousel-title-' + i"
+            [attr.aria-roledescription]="'diapositiva'"
+            [attr.aria-label]="'Diapositiva ' + (i + 1) + ' de ' + items.length" role="tabpanel">
+            <img [src]="item.imageUrl" [alt]="item.title || 'Instrucción ' + (i + 1)" class="carousel-image"
+                loading="lazy" (load)="onImageLoad()" (error)="onImageError(item)">
+            <div class="container-instructions">
+                <div class="container-number">
+                    <h2 [id]="'carousel-title-' + i" class="intruction">
+                        {{ item.title || 'Instrucción ' + (i + 1) }}
+                    </h2>
+                </div>
+                <div class="container-items">
+                    <div *ngIf="item.description" [innerHTML]="sanitizeHtml(item.description)"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button *ngIf="showArrows && items.length > 1" class="carousel-button prev" (click)="prev()"
+        [disabled]="currentIndex === 0" aria-label="Diapositiva anterior" type="button">
+        <span class="visually-hidden">
+        </span>
+        <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </svg>
+    </button>
+
+    <button *ngIf="showArrows && items.length > 1" class="carousel-button next" (click)="next()"
+        [disabled]="currentIndex === items.length - 1" aria-label="Siguiente diapositiva" type="button">
+        <span class="visually-hidden"> </span>
+        <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+        </svg>
+    </button>
+
+    <div *ngIf="showDots && items.length > 1" class="carousel-dots" role="tablist" aria-label="Navegación del carrusel">
+        <button *ngFor="let item of items; let i = index" type="button" role="tab" [id]="'carousel-tab-' + i"
+            [attr.aria-selected]="i === currentIndex" [attr.aria-controls]="'carousel-item-' + i" (click)="goToSlide(i)"
+            (keydown.enter)="goToSlide(i)" (keydown.space)="goToSlide(i); $event.preventDefault()" class="carousel-dot"
+            [class.active]="i === currentIndex" [attr.tabindex]="i === currentIndex ? '0' : '-1'"
+            [attr.aria-label]="'Ir a la diapositiva ' + (i + 1) + ' de ' + items.length">
+            <span class="visually-hidden"> {{ i + 1 }}</span>
+        </button>
+    </div>
+</div>

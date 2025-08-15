@@ -1,0 +1,13 @@
+<div class="dialog_header">
+    <h1 mat-dialog-title>{{ data.title }}</h1>
+</div>
+
+<hr />
+
+<div mat-dialog-content>
+    <p>{{ data.message }}</p>
+</div>
+
+<mat-dialog-actions align="center">
+    <button mat-button (click)="onClose()">VOLVER</button>
+</mat-dialog-actions>
