@@ -10,7 +10,6 @@ import { HeaderRulitComponent } from 'src/app/layout/header-rulit/header-rulit.c
 import { MATERIAL_IMPORTS } from 'src/app/shared/ui/material.imports';
 
 import { RulitUserService } from '../services/rulit.service';
-import { SharedModule } from 'src/app/shared/shared.module';
 import { Breakpoints, BreakpointObserver, BreakpointState, MediaMatcher } from '@angular/cdk/layout';
 import { RulitDialogScreenOrientationComponent } from './rulit-dialog-screen-orientation.component';
 import { RulitDialogLongMemoryWellcomeComponent } from './rulit-dialog-long-memory-wellcome.component';

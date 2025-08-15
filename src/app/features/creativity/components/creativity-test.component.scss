@@ -51,7 +51,7 @@ section.container {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    width: auto;
+
 }
 
 // CLOCK STYLE
@@ -222,15 +222,6 @@ article.container-textarea {
     position: relative;
     top: 12px;
 }
-.label-test {
-    font-weight: 500;
-    font-size: 15px;
-    color: #ffffff;
-    text-align: center;
-    background-color: #4a4067;
-    border-radius: 10px 10px 0px 0px;
-    padding: 10px 0px;
-}
 
 .example-form {
     min-width: 150px;
@@ -238,13 +229,9 @@ article.container-textarea {
     width: 100%;
 }
   
-.example-full-width {
-    width: auto;
-}
 .mat-form-field-infix .ng-tns-c91-0 {
     width: auto;
 }
-// ALERT
 
 section.container-alert {
     background-color: #ffffff;
@@ -252,7 +239,6 @@ section.container-alert {
     z-index: 2;
     width: 306px;
     height: 133px;
-    border-radius: 0px 0px 10px 10px;;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -311,7 +297,6 @@ h4.message, p.message {
         font-size: 1.6em; 
         margin-top: 40px;  
         width: 440px;
-        margin-top: 0px 0px;
     }
     h2.result {
         
