@@ -48,6 +48,9 @@ docker*
 /firebase.json
 .firebaserc
 
+/src/app/features/encode
+
+
 
 # Firebase
 .firebase
