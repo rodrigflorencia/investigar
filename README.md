@@ -12,6 +12,8 @@ La aplicación está desarrollada con [Angular](https://angular.io/) en el _fron
 
 Cada _test_ está integrado en la aplicación como un módulo separado, lo que permite encapsular su lógica y componentes. Investig.ar busca ser modular, escalable y mantenible, cumpliendo principios de separación de responsabilidades y bajo acoplamiento entre componentes.
 
+Esta guía se complementa con la documentación disponible en la [carpeta](media).
+
 ## Arquitectura de la aplicación
 
 La arquitectura de Investig.ar sigue una estructura **multicapa** típica de aplicaciones Angular modernas, apoyada en servicios de Firebase como _backend_. A alto nivel, el flujo es el siguiente:
@@ -602,7 +604,7 @@ Para concluir, las mejoras sugeridas arriba buscan pulir detalles que harán la 
 
 Ejemplo de estructura
 
-![Ejemplo de estructura](image-3.png)
+![Ejemplo de estructura](media/image-3.png)
 
 Diagrama 4: Ejemplo de estructura.
 
