@@ -119,9 +119,10 @@ export class RulitUserService {
     createNewUser(newUserData: {
         name: string;
         email: string;
-        formRespID: string;
+
     }): void {
         this._user = {
+
             userId: '',
             email: newUserData.email || 'usuario@example.com',
             name: newUserData.name || 'usuario@example.com',
@@ -132,7 +133,6 @@ export class RulitUserService {
             nextTest: 'learning',
             trainingDate: null,
             testDate: null,
-            formRespID: newUserData.formRespID || 'usuario@example.com',
         };
 
         for (let i = 0; i < 15; i++) {
@@ -148,7 +148,7 @@ export class RulitUserService {
         } else {
             this._user.graphAndSolutionCode = DEFAULT_GRAPH_SOLUTION;
         }
-        console.log("this._user", this._user);
+
     }
 
     // Load user from db
@@ -156,7 +156,7 @@ export class RulitUserService {
         this._user = (
             await this._rulitFirestoreService.getRulitUserData(userId)
         ).data();
-        console.log("pasa._user", this._user)
+
         return true;
     }
 
@@ -187,7 +187,6 @@ export class RulitUserService {
                 exercisesWithoutMistakes = 0;
             }
         });
-        console.log("pasas", exercisesWithoutMistakes);
         return exercisesWithoutMistakes;
     }
 

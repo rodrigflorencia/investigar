@@ -17,7 +17,7 @@ import { RulitDialogFinishComponent } from './rulit-dialog-finish.component';
 import { RulitDialogNotConnectedNodeComponent } from './rulit-dialog-not-connected-node.component';
 import { RulitTestService } from '../services/rulit.test.service';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
     selector: 'app-rulit-test-page',
@@ -56,7 +56,29 @@ export class RulitTestPage implements OnInit, AfterViewChecked, OnDestroy {
         private readonly _dialog: MatDialog,
         private readonly _breakpointObserver: BreakpointObserver,
         private readonly _mediaMatcher: MediaMatcher,
+        private readonly _snackBar: MatSnackBar,
     ) { }
+
+    private canTakeTest(): boolean {
+        const user = this._userService.user;
+
+
+        // If trainingDate is null, allow taking the test
+        if (user.trainingDate === null) {
+            return true;
+        }
+
+        // Calculate days difference between today and trainingDate
+        const trainingDate = user.trainingDate.toDate();
+        console.log(this._userService.user);
+        console.log(trainingDate);
+        const today = new Date();
+        const diffTime = Math.abs(today.getTime() - trainingDate.getTime());
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+        // Allow test if at least 4 days have passed since training
+        return diffDays >= 4;
+    }
 
     async ngOnInit(): Promise<void> {
         // When user enters the URL for the long term memory test.
@@ -64,6 +86,16 @@ export class RulitTestPage implements OnInit, AfterViewChecked, OnDestroy {
         if (!this._userService.user) {
             const userIdParam = this.route.snapshot.paramMap.get('userId');
             await this._userService.loadUserFromDB(userIdParam);
+        }
+
+        // Check if user can take the test
+        if (!this.canTakeTest()) {
+            this._snackBar.open('No puedes realizar el test nuevamente.', 'Cerrar', {
+                duration: 10000,
+                panelClass: ['error-snackbar']
+            });
+
+            return;
         }
 
         // TODO: Cambiar la segunda condicion por: ! this._testService.isTesting
@@ -106,6 +138,7 @@ export class RulitTestPage implements OnInit, AfterViewChecked, OnDestroy {
     }
 
     private async initTest() {
+
         await this.countdown();
 
         this.setCanvasSize();
@@ -251,6 +284,7 @@ export class RulitTestPage implements OnInit, AfterViewChecked, OnDestroy {
     private goNextExercise(): void {
         this.router.routeReuseStrategy.shouldReuseRoute = () => false;
         this.router.onSameUrlNavigation = 'reload';
+
         this.router.navigate(['rulit/test', this._userService.user.userId]);
     }
 
