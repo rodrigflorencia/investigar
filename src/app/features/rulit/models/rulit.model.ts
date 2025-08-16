@@ -213,7 +213,10 @@ export class Graph implements IGraph {
     get activeNode(): GraphNode { return this._activeNode; }
     get activeNode$() { return this._activeNodeChange$.asObservable(); }
     set activeNode(theNode: GraphNode) {
-        this.nodes.forEach(node => node.id == theNode.id ? node.isActive = true : node.isActive = false);
+        this.nodes.forEach(node => {
+            const isActive = node.id === theNode.id;
+            node.isActive = isActive;
+        });
         this._activeNodeChange$.next(theNode);
     }
     get firstNode(): GraphNode {
@@ -298,7 +301,8 @@ export class CanvasGraph extends Graph implements ICanvasGraph {
         this.activeNode.circle.fill = COLOR_WHITE;
         if (this.activeNode.isFirstNode) { this.activeNode.circle.fill = COLOR_TRANSPARENT_GREEN; }
         const i = setInterval(() => {
-            Math.abs(frame % 2) == 1 ? (newNode.circle.fill = COLOR_RED) : newNode.resetColor();
+            const shouldFillRed = Math.abs(frame % 2) === 1;
+            newNode.circle.fill = shouldFillRed ? COLOR_RED : newNode.fill;
             this.draw();
             frame++;
             const requestId = requestAnimationFrame(() => this.flickerNode);
