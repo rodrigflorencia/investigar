@@ -21,13 +21,38 @@ function onFormSubmit(e) {
   const responseId = formResp.getId();         // ID de respuesta del Form
   const editUrl    = formResp.getEditResponseUrl();
   const timestamp  = formResp.getTimestamp();  // Date
-
+  let nameFromForm = null;
+  const NAME_QUESTION_TITLES = [
+    'Nombre',
+    'Nombre y apellido',
+    'Nombre completo',
+    'Name',
+    'Full name'
+  ];
   // Mapear respuestas por título de pregunta
   const answers = {};
   formResp.getItemResponses().forEach(ir => {
     const title = ir.getItem().getTitle();
-    answers[title] = ir.getResponse();
+    let value = ir.getResponse();
+
+    // Normalizar a string si es array (p.ej. checkbox)
+    if (Array.isArray(value)) value = value.join(', ');
+    if (value !== null && value !== undefined) value = String(value);
+
+    answers[title] = value;
+
+    // Detección del campo "nombre"
+    const normTitle = title.trim().toLowerCase();
+    const isConfiguredTitle = NAME_QUESTION_TITLES
+      .map(t => t.trim().toLowerCase())
+      .includes(normTitle);
+    const looksLikeName = /(^|\b)nombre(\b|$)/i.test(title) || /\bname\b/i.test(title);
+
+    if (!nameFromForm && typeof value === 'string' && (isConfiguredTitle || looksLikeName)) {
+      nameFromForm = value.trim();
+    }
   });
+  
 
   // Documento a guardar en Firestore con ID = responseId
   
@@ -36,6 +61,7 @@ function onFormSubmit(e) {
     editUrl,
     userId: `${responseId}`,
     graphAndSolutionCode: "19db35dd",
+    name: nameFromForm,
     submittedAt: timestamp,
     answers,
     shortMemoryTest: [],      // Array<IRulitExercise>
