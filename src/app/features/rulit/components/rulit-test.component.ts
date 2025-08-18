@@ -288,6 +288,10 @@ export class RulitTestPage implements OnInit, AfterViewChecked, OnDestroy {
     }
 
     private goNextExercise(): void {
+        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+        this.router.onSameUrlNavigation = 'reload';
+
+        console.log('goNextExercise');
 
         this.router.navigate(['rulit/test', this._userService.user.userId]);
     }
