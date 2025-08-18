@@ -17,7 +17,7 @@ import { RulitDialogFinishComponent } from './rulit-dialog-finish.component';
 import { RulitDialogNotConnectedNodeComponent } from './rulit-dialog-not-connected-node.component';
 import { RulitTestService } from '../services/rulit.test.service';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
-
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
     selector: 'app-rulit-test-page',
@@ -56,56 +56,95 @@ export class RulitTestPage implements OnInit, AfterViewChecked, OnDestroy {
         private readonly _dialog: MatDialog,
         private readonly _breakpointObserver: BreakpointObserver,
         private readonly _mediaMatcher: MediaMatcher,
+        private readonly _snackBar: MatSnackBar,
     ) { }
 
-    async ngOnInit(): Promise<void> {
-        // When user enters the URL for the long term memory test.
-        //      - eg. /rulit/test/<<userId>>
-        if (!this._userService.user) {
-            const userIdParam = this.route.snapshot.paramMap.get('userId');
-            await this._userService.loadUserFromDB(userIdParam);
+    private canTakeTest(): boolean {
+        if (!this._userService) {
+            return true;
         }
 
-        // TODO: Cambiar la segunda condicion por: ! this._testService.isTesting
-        if (
-            this._userService.user.nextTest === 'long_memory_test' &&
-            this._userService.user.longMemoryTest.length === 0
-        ) {
-            await this.openLongMemoryWellcomeDialog().afterClosed().toPromise();
+        const user = this._userService.user;
+        if (user === undefined) {
+            return true;
+        }
+        // If trainingDate is null, allow taking the test
+        if (user.trainingDate === null) {
+            return true;
         }
 
-        // Test inits if the mobile is landscape or not in mobile
-        if (this._mediaMatcher.matchMedia(Breakpoints.Handset).matches) {
-            let orientationDialogRef: MatDialogRef<RulitDialogScreenOrientationComponent> =
-                null;
+        // Calculate days difference between today and trainingDate
+        const trainingDate = user.trainingDate.toDate();
 
-            this.orientationChange$ = this._breakpointObserver
-                .observe(Breakpoints.HandsetLandscape)
-                .subscribe((result: BreakpointState) => {
-                    if (result.matches) {
-                        if (orientationDialogRef) {
-                            orientationDialogRef.close();
-                        }
-                        if (
-                            !this.testStarted &&
-                            this._breakpointObserver.isMatched(Breakpoints.HandsetLandscape)
-                        ) {
-                            this.testStarted = true;
-                            this.initTest();
-                        }
-                    } else {
-                        orientationDialogRef = this.openScreenOrientationDialog();
-                    }
-                });
-        } // Not in mobile
-        else {
-            if (!this._testService.isTesting) {
-                this.initTest();
-            }
-        }
+        const today = new Date();
+        const diffTime = Math.abs(today.getTime() - trainingDate.getTime());
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+        // Allow test if at least 4 days have passed since training
+        return diffDays >= 4;
     }
 
+    async ngOnInit(): Promise<void> {
+        try {
+            // When user enters the URL for the long term memory test.
+            //      - eg. /rulit/test/<<userId>>
+            if (!this._userService.user) {
+                const userIdParam = this.route.snapshot.paramMap.get('userId');
+                await this._userService.loadUserFromDB(userIdParam);
+            }
+
+            // Check if user can take the test
+            if (!this.canTakeTest()) {
+                this._snackBar.open('No puedes realizar el test nuevamente.', 'Cerrar', {
+                    duration: 10000,
+                    panelClass: ['error-snackbar']
+                });
+
+                return;
+            }
+
+            // TODO: Cambiar la segunda condicion por: ! this._testService.isTesting
+            if (
+                this._userService.user.nextTest === 'long_memory_test' &&
+                this._userService.user.longMemoryTest.length === 0
+            ) {
+
+                await this.openLongMemoryWellcomeDialog().afterClosed().toPromise();
+            }
+
+            // Test inits if the mobile is landscape or not in mobile
+            if (this._mediaMatcher.matchMedia(Breakpoints.Handset).matches) {
+                let orientationDialogRef: MatDialogRef<RulitDialogScreenOrientationComponent> =
+                    null;
+
+                this.orientationChange$ = this._breakpointObserver
+                    .observe(Breakpoints.HandsetLandscape)
+                    .subscribe((result: BreakpointState) => {
+                        if (result.matches) {
+                            if (orientationDialogRef) {
+                                orientationDialogRef.close();
+                            }
+                            if (
+                                !this.testStarted &&
+                                this._breakpointObserver.isMatched(Breakpoints.HandsetLandscape)
+                            ) {
+                                this.testStarted = true;
+                                this.initTest();
+                            }
+                        } else {
+                            orientationDialogRef = this.openScreenOrientationDialog();
+                        }
+                    });
+            } // Not in mobile
+            else if (!this._testService.isTesting) {
+                this.initTest();
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
     private async initTest() {
+
         await this.countdown();
 
         this.setCanvasSize();
@@ -249,8 +288,7 @@ export class RulitTestPage implements OnInit, AfterViewChecked, OnDestroy {
     }
 
     private goNextExercise(): void {
-        this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-        this.router.onSameUrlNavigation = 'reload';
+
         this.router.navigate(['rulit/test', this._userService.user.userId]);
     }
 
@@ -294,6 +332,7 @@ export class RulitTestPage implements OnInit, AfterViewChecked, OnDestroy {
         }
         this.testChange$.unsubscribe();
         this.exerciseChange$.unsubscribe();
+
     }
 
     // Dialogs
